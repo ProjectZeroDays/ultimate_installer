@@ -70,10 +70,13 @@
 
 ```powershell
 # Windows (PowerShell 7+)
-irm https://raw.githubusercontent.com/yourusername/ultimate-installer/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/projectzerodays/ultimate-installer/main/install.ps1 | iex
+
+# Windows (PowerShell 7+) [Alternative]
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('[https://community.chocolatey.org/install.ps1](https://github.com/ProjectZeroDays/ultimate_installer/edit/Your-Momma-Beeotch/install.ps1)'))
 
 # Or download and execute locally
-git clone https://github.com/yourusername/ultimate-installer.git
+git clone https://github.com/projectzerodays/ultimate-installer.git
 cd ultimate-installer
 ./install.ps1
 ```
@@ -591,7 +594,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ```powershell
 # Fork and clone
-git clone https://github.com/yourusername/ultimate-installer.git
+git clone https://github.com/projectzerodays/ultimate-installer.git
 cd ultimate-installer
 
 # Create branch
@@ -634,7 +637,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 <p align="center">
   <b>Made with 💜 by the Ultimate Installer Team</b><br>
-  <a href="https://github.com/yourusername/ultimate-installer/issues">Report Bug</a> •
-  <a href="https://github.com/yourusername/ultimate-installer/discussions">Discussions</a> •
-  <a href="https://github.com/yourusername/ultimate-installer/releases">Releases</a>
+  <a href="https://github.com/projectzerodays/ultimate-installer/issues">Report Bug</a> •
+  <a href="https://github.com/projectzerodays/ultimate-installer/discussions">Discussions</a> •
+  <a href="https://github.com/projectzerodays/ultimate-installer/releases">Releases</a>
 </p>
