@@ -69,8 +69,8 @@
 ### One-Line Install (Recommended)
 
 ```powershell
-# Windows (PowerShell 7+)
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/ProjectZeroDays/ultimate_installer/raw/Your-Momma-Beeotch/install.ps1'))
+# Download & Run Script
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/refs/heads/main/install.ps1'))
 ```
 
 ```powershell
