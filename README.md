@@ -146,7 +146,7 @@
 
 Download the latest release for your platform:
 
-#### Linux
+#### Linux (x64)
 
 ```bash
 # Linux (x64)
@@ -164,7 +164,7 @@ chmod +x ultimate-installer
 sudo mv ultimate-installer /usr/local/bin/
 ```
 
-#### Windows (Powershell)
+#### Windows (PowerShell)
 
 ```bash
 # Windows (PowerShell)
@@ -174,7 +174,7 @@ Move-Item .\ultimate-installer.exe $env:LOCALAPPDATA\Microsoft\WindowsApps\
 
 ### Method 2: Install Script
 
-#### Unix/Linux/macOS
+#### Unix/Linux/MacOS
 
 ```bash
 # Unix/Linux/macOS
