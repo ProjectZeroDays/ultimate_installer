@@ -134,7 +134,7 @@ New-Item -ItemType Directory -Path "$HOME/Tools" -Force
 Set-Location "$HOME/Tools"
 
 # Download script
- Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('[https://community.chocolatey.org/install.ps1](https://github.com/ProjectZeroDays/ultimate_installer/edit/Your-Momma-Beeotch/install.ps1)'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('[https://community.chocolatey.org/install.ps1](https://github.com/ProjectZeroDays/ultimate_installer/edit/Your-Momma-Beeotch/install.ps1)'))
 
 # Execute
 ./install.ps1
