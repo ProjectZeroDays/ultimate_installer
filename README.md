@@ -169,10 +169,10 @@ brew install ultimate-installer
 ║  [4] 🔄 Check Updates      [5] 🔧 System Tweaks     [6] ⚙️ Settings  ║
 ║  [7] 🛡️ Privacy Tools      [8] 🎯 Quick Install     [9] 📊 Status    ║
 ╠═══════════════════════════════════════════════════════════════════════╣
-║  QUICK: [DEV] [AI] [SEC] [CLOUD] [PRIVACY] [KALI] [KODACHI]           ║
-║  SPECIAL: [W] Web AI  [U] Update All  [B] Backup  [R] Restore         ║
+║     QUICK:  [DEV] [AI] [SEC] [CLOUD] [PRIVACY] [KALI] [KODACHI]       ║
+║     SPECIAL:  [W] Web AI  [U] Update All  [B] Backup  [R] Restore     ║
 ╠═══════════════════════════════════════════════════════════════════════╣
-║  [Q] Quit  |  Direct: Type app name (e.g., 'code', 'git', 'python')   ║
+║  [Q] Quit  |  Direct: Type app name: (e.g., 'code', 'git', 'python')  ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
