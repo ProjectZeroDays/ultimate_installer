@@ -306,7 +306,7 @@ $script:MasterApps += @(
     @{
         ID = "kodachi_encrypted_dns"; Name = "Kodachi DNSCrypt-Proxy"; Category = "Privacy";
         OSFilter = "Linux"; SubCategory = "Kodachi";
-        LinuxIDs = @{ script = "curl -fsSL https://raw.githubusercontent.com/DNSCrypt/dnscrypt-proxy/master/dnscrypt-proxy/utils/generate-domains-blocklist/generate-domains-blocklist.py | sudo tee /usr/local/bin/dnscrypt-setup" };
+        LinuxIDs = @{ script = 'curl -fsSL https://raw.githubusercontent.com/DNSCrypt/dnscrypt-proxy/master/dnscrypt-proxy/utils/generate-domains-blocklist/generate-domains-blocklist.py | sudo tee /usr/local/bin/dnscrypt-setup' };
         ConfigHooks = @("kodachi-dnscrypt-config");
         Description = "Encrypted DNS with ad/tracker blocking"
     },
@@ -409,9 +409,9 @@ $script:MasterApps += @(
 $script:MasterApps += @(
     @{ ID = "python3"; Name = "Python 3.12"; Category = "Languages"; WinIDs = @{ winget = "Python.Python.3.12"; choco = "python"; scoop = "python" }; MacIDs = @{ brew = "python@3.12" }; LinuxIDs = @{ apt = "python3"; dnf = "python3"; pacman = "python" }; ConfigHooks = @("pip-config", "pipx-tools", "poetry-install", "pyenv-setup") },
     @{ ID = "nodejs"; Name = "Node.js LTS"; Category = "Languages"; WinIDs = @{ winget = "OpenJS.NodeJS.LTS"; choco = "nodejs-lts"; scoop = "nodejs-lts" }; MacIDs = @{ brew = "node@20" }; LinuxIDs = @{ apt = "nodejs"; dnf = "nodejs"; snap = "node" }; ConfigHooks = @("npm-global", "nvm-setup", "pnpm-setup", "yarn-setup") },
-    @{ ID = "bun"; Name = "Bun Runtime"; Category = "Languages"; WinIDs = @{ winget = "Oven-sh.Bun"; scoop = "bun" }; MacIDs = @{ brew = "bun" }; LinuxIDs = @{ script = "curl -fsSL https://bun.sh/install | bash" } },
-    @{ ID = "deno"; Name = "Deno Runtime"; Category = "Languages"; WinIDs = @{ winget = "DenoLand.Deno"; choco = "deno"; scoop = "deno" }; MacIDs = @{ brew = "deno" }; LinuxIDs = @{ script = "curl -fsSL https://deno.land/install.sh | sh" } },
-    @{ ID = "rust"; Name = "Rust Toolchain"; Category = "Languages"; WinIDs = @{ winget = "Rustlang.Rustup"; choco = "rust"; scoop = "rustup" }; MacIDs = @{ brew = "rustup-init" }; LinuxIDs = @{ script = "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y" }; ConfigHooks = @("rust-cargo-config", "rust-analyzer") },
+    @{ ID = "bun"; Name = "Bun Runtime"; Category = "Languages"; WinIDs = @{ winget = "Oven-sh.Bun"; scoop = "bun" }; MacIDs = @{ brew = "bun" }; LinuxIDs = @{ script = 'curl -fsSL https://bun.sh/install | bash' } },
+    @{ ID = "deno"; Name = "Deno Runtime"; Category = "Languages"; WinIDs = @{ winget = "DenoLand.Deno"; choco = "deno"; scoop = "deno" }; MacIDs = @{ brew = "deno" }; LinuxIDs = @{ script = 'curl -fsSL https://deno.land/install.sh | sh' } },
+    @{ ID = "rust"; Name = "Rust Toolchain"; Category = "Languages"; WinIDs = @{ winget = "Rustlang.Rustup"; choco = "rust"; scoop = "rustup" }; MacIDs = @{ brew = "rustup-init" }; LinuxIDs = @{ script = 'curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y' }; ConfigHooks = @("rust-cargo-config", "rust-analyzer") },
     @{ ID = "golang"; Name = "Go"; Category = "Languages"; WinIDs = @{ winget = "GoLang.Go"; choco = "golang"; scoop = "go" }; MacIDs = @{ brew = "go" }; LinuxIDs = @{ apt = "golang-go"; snap = "go" } },
     @{ ID = "dotnet"; Name = ".NET SDK"; Category = "Languages"; WinIDs = @{ winget = "Microsoft.DotNet.SDK.8"; choco = "dotnet-sdk"; scoop = "dotnet-sdk" }; MacIDs = @{ cask = "dotnet-sdk" }; LinuxIDs = @{ snap = "dotnet-sdk" } },
     @{ ID = "java_openjdk"; Name = "OpenJDK 21"; Category = "Languages"; WinIDs = @{ winget = "EclipseAdoptium.Temurin.21.JDK"; choco = "openjdk"; scoop = "openjdk21" }; MacIDs = @{ cask = "temurin@21" }; LinuxIDs = @{ apt = "openjdk-21-jdk"; dnf = "java-21-openjdk-devel" } },
@@ -422,10 +422,10 @@ $script:MasterApps += @(
 
 # === AI & MACHINE LEARNING ===
 $script:MasterApps += @(
-    @{ ID = "ollama"; Name = "Ollama (Local LLMs)"; Category = "AI/ML"; WinIDs = @{ winget = "Ollama.Ollama"; choco = "ollama"; scoop = "ollama" }; MacIDs = @{ brew = "ollama" }; LinuxIDs = @{ script = "curl -fsSL https://ollama.com/install.sh | sh" }; ConfigHooks = @("ollama-models", "ollama-systemd") },
-    @{ ID = "docker"; Name = "Docker Desktop"; Category = "AI/ML"; WinIDs = @{ winget = "Docker.DockerDesktop"; choco = "docker-desktop" }; MacIDs = @{ cask = "docker" }; LinuxIDs = @{ script = "curl -fsSL https://get.docker.com | sh" }; ConfigHooks = @("docker-nvidia", "docker-compose", "docker-buildx") },
-    @{ ID = "nvidia_cuda"; Name = "NVIDIA CUDA Toolkit"; Category = "AI/ML"; OSFilter = "Windows,Linux"; WinIDs = @{ winget = "Nvidia.CUDA"; choco = "cuda" }; LinuxIDs = @{ script = "distribution=$(. /etc/os-release;echo $ID$VERSION_ID) && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list" } },
-    @{ ID = "anaconda"; Name = "Anaconda Distribution"; Category = "AI/ML"; WinIDs = @{ winget = "Anaconda.Anaconda3"; choco = "anaconda3" }; MacIDs = @{ cask = "anaconda" }; LinuxIDs = @{ script = "wget https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh -O /tmp/anaconda.sh && bash /tmp/anaconda.sh -b -p $HOME/anaconda3" }; ConfigHooks = @("conda-forge", "conda-envs") },
+    @{ ID = "ollama"; Name = "Ollama (Local LLMs)"; Category = "AI/ML"; WinIDs = @{ winget = "Ollama.Ollama"; choco = "ollama"; scoop = "ollama" }; MacIDs = @{ brew = "ollama" }; LinuxIDs = @{ script = 'curl -fsSL https://ollama.com/install.sh | sh' }; ConfigHooks = @("ollama-models", "ollama-systemd") },
+    @{ ID = "docker"; Name = "Docker Desktop"; Category = "AI/ML"; WinIDs = @{ winget = "Docker.DockerDesktop"; choco = "docker-desktop" }; MacIDs = @{ cask = "docker" }; LinuxIDs = @{ script = 'curl -fsSL https://get.docker.com | sh' }; ConfigHooks = @("docker-nvidia", "docker-compose", "docker-buildx") },
+    @{ ID = "nvidia_cuda"; Name = "NVIDIA CUDA Toolkit"; Category = "AI/ML"; OSFilter = "Windows,Linux"; WinIDs = @{ winget = "Nvidia.CUDA"; choco = "cuda" }; LinuxIDs = @{ script = 'distribution=$(. /etc/os-release;echo $ID$VERSION_ID) ; curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - ; curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list' } },
+    @{ ID = "anaconda"; Name = "Anaconda Distribution"; Category = "AI/ML"; WinIDs = @{ winget = "Anaconda.Anaconda3"; choco = "anaconda3" }; MacIDs = @{ cask = "anaconda" }; LinuxIDs = @{ script = 'wget https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh -O /tmp/anaconda.sh ; bash /tmp/anaconda.sh -b -p $HOME/anaconda3' }; ConfigHooks = @("conda-forge", "conda-envs") },
     @{ ID = "jupyter"; Name = "Jupyter Lab"; Category = "AI/ML"; WinIDs = @{ pip = "jupyterlab" }; MacIDs = @{ pip = "jupyterlab" }; LinuxIDs = @{ pip = "jupyterlab" }; Dependencies = @("python3") },
     @{ ID = "chatgpt_desktop"; Name = "ChatGPT Desktop"; Category = "AI/ML"; WinIDs = @{ winget = "OpenAI.ChatGPT"; scoop = "chatgpt" }; MacIDs = @{ cask = "chatgpt" } },
     @{ ID = "claude_desktop"; Name = "Claude Desktop"; Category = "AI/ML"; WinIDs = @{ winget = "Anthropic.Claude"; scoop = "claude" }; MacIDs = @{ cask = "claude" } },
@@ -439,13 +439,13 @@ $script:MasterApps += @(
 $script:MasterApps += @(
     @{ ID = "kali_wsl"; Name = "Kali Linux (WSL)"; Category = "Security"; OSFilter = "Windows"; WinIDs = @{ winget = "KaliLinux.KaliLinux"; msstore = "9PKR34TNCV07" }; ConfigHooks = @("kali-gui", "kali-tools", "kali-wslg") },
     @{ ID = "metasploit"; Name = "Metasploit Framework"; Category = "Security"; WinIDs = @{ winget = "Rapid7.MetasploitFramework"; choco = "metasploit" }; MacIDs = @{ brew = "metasploit" }; LinuxIDs = @{ apt = "metasploit-framework" } },
-    @{ ID = "nmap"; Name = "Nmap & Zenmap"; Category = "Security"; WinIDs = @{ winget = "Insecure.Nmap"; choco = "nmap"; scoop = "nmap" }; MacIDs = @{ brew = "nmap" }; LinuxIDs = @{ apt = "nmap"; dnf = "nmap" } },
+    @{ ID = "nmap"; Name = "Nmap and Zenmap"; Category = "Security"; WinIDs = @{ winget = "Insecure.Nmap"; choco = "nmap"; scoop = "nmap" }; MacIDs = @{ brew = "nmap" }; LinuxIDs = @{ apt = "nmap"; dnf = "nmap" } },
     @{ ID = "zenmap"; Name = "Zenmap GUI"; Category = "Security"; WinIDs = @{ winget = "Insecure.Zenmap" }; MacIDs = @{ cask = "zenmap" }; LinuxIDs = @{ apt = "zenmap" } },
     @{ ID = "wireshark"; Name = "Wireshark"; Category = "Security"; WinIDs = @{ winget = "WiresharkFoundation.Wireshark"; choco = "wireshark"; scoop = "wireshark" }; MacIDs = @{ cask = "wireshark" }; LinuxIDs = @{ apt = "wireshark"; dnf = "wireshark" } },
     @{ ID = "burp_suite"; Name = "Burp Suite Professional"; Category = "Security"; WinIDs = @{ winget = "PortSwigger.BurpSuite.Professional" }; MacIDs = @{ cask = "burp-suite" } },
     @{ ID = "wireguard"; Name = "WireGuard VPN"; Category = "Security"; WinIDs = @{ winget = "WireGuard.WireGuard"; choco = "wireguard"; scoop = "wireguard" }; MacIDs = @{ cask = "wireguard" }; LinuxIDs = @{ apt = "wireguard"; dnf = "wireguard-tools" } },
-    @{ ID = "protonvpn"; Name = "Proton VPN"; Category = "Security"; WinIDs = @{ winget = "Proton.ProtonVPN"; choco = "protonvpn"; scoop = "protonvpn" }; MacIDs = @{ cask = "protonvpn" }; LinuxIDs = @{ script = "wget -q -O - https://repo.protonvpn.com/debian/public-key.asc | sudo apt-key add - && echo 'deb https://repo.protonvpn.com/debian stable main' | sudo tee /etc/apt/sources.list.d/protonvpn.list && sudo apt update && sudo apt install protonvpn" } },
-    @{ ID = "mullvad"; Name = "Mullvad VPN"; Category = "Security"; WinIDs = @{ winget = "MullvadVPN.MullvadVPN"; choco = "mullvad-app" }; MacIDs = @{ cask = "mullvadvpn" }; LinuxIDs = @{ script = "curl -fsSL https://mullvad.net/en/download/app/deb/latest | sudo dpkg -i /dev/stdin" } },
+    @{ ID = "protonvpn"; Name = "Proton VPN"; Category = "Security"; WinIDs = @{ winget = "Proton.ProtonVPN"; choco = "protonvpn"; scoop = "protonvpn" }; MacIDs = @{ cask = "protonvpn" }; LinuxIDs = @{ script = 'wget -q -O - https://repo.protonvpn.com/debian/public-key.asc | sudo apt-key add - ; echo "deb https://repo.protonvpn.com/debian stable main" | sudo tee /etc/apt/sources.list.d/protonvpn.list ; sudo apt update ; sudo apt install protonvpn' } },
+    @{ ID = "mullvad"; Name = "Mullvad VPN"; Category = "Security"; WinIDs = @{ winget = "MullvadVPN.MullvadVPN"; choco = "mullvad-app" }; MacIDs = @{ cask = "mullvadvpn" }; LinuxIDs = @{ script = 'curl -fsSL https://mullvad.net/en/download/app/deb/latest | sudo dpkg -i /dev/stdin' } },
     @{ ID = "tor_browser"; Name = "Tor Browser"; Category = "Security"; WinIDs = @{ winget = "TorProject.TorBrowser"; choco = "tor-browser"; scoop = "tor-browser" }; MacIDs = @{ cask = "tor-browser" }; LinuxIDs = @{ flatpak = "com.torproject.torbrowser-launcher" } },
     @{ ID = "veracrypt"; Name = "VeraCrypt"; Category = "Security"; WinIDs = @{ winget = "IDRIX.VeraCrypt"; choco = "veracrypt"; scoop = "veracrypt" }; MacIDs = @{ cask = "veracrypt" }; LinuxIDs = @{ apt = "veracrypt"; snap = "veracrypt" } },
     @{ ID = "keepassxc"; Name = "KeePassXC"; Category = "Security"; WinIDs = @{ winget = "KeePassXC.KeePassXC"; choco = "keepassxc"; scoop = "keepassxc" }; MacIDs = @{ cask = "keepassxc" }; LinuxIDs = @{ apt = "keepassxc"; snap = "keepassxc" } },
@@ -466,16 +466,16 @@ $script:MasterApps += @(
     @{ ID = "k9s"; Name = "K9s (K8s TUI)"; Category = "Cloud"; WinIDs = @{ winget = "Derailed.k9s"; scoop = "k9s" }; MacIDs = @{ brew = "k9s" }; LinuxIDs = @{ snap = "k9s" } },
     @{ ID = "lens"; Name = "Lens Kubernetes IDE"; Category = "Cloud"; WinIDs = @{ winget = "Mirantis.Lens"; choco = "lens"; scoop = "lens" }; MacIDs = @{ cask = "lens" }; LinuxIDs = @{ snap = "kontena-lens"; flatpak = "dev.k8slens.OpenLens" } },
     @{ ID = "terraform"; Name = "Terraform"; Category = "Cloud"; WinIDs = @{ winget = "HashiCorp.Terraform"; choco = "terraform"; scoop = "terraform" }; MacIDs = @{ brew = "terraform" }; LinuxIDs = @{ apt = "terraform"; snap = "terraform" } },
-    @{ ID = "pulumi"; Name = "Pulumi"; Category = "Cloud"; WinIDs = @{ winget = "Pulumi.Pulumi"; choco = "pulumi"; scoop = "pulumi" }; MacIDs = @{ brew = "pulumi" }; LinuxIDs = @{ script = "curl -fsSL https://get.pulumi.com | sh" } },
-    @{ ID = "awscli"; Name = "AWS CLI v2"; Category = "Cloud"; WinIDs = @{ winget = "Amazon.AWSCLI"; choco = "awscli"; scoop = "aws" }; MacIDs = @{ brew = "awscli" }; LinuxIDs = @{ snap = "aws-cli"; script = "curl 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o 'awscliv2.zip' && unzip awscliv2.zip && sudo ./aws/install" }; ConfigHooks = @("aws-configure", "aws-sso") },
-    @{ ID = "azurecli"; Name = "Azure CLI"; Category = "Cloud"; WinIDs = @{ winget = "Microsoft.AzureCLI"; choco = "azure-cli"; scoop = "azure-cli" }; MacIDs = @{ brew = "azure-cli" }; LinuxIDs = @{ script = "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash" } },
-    @{ ID = "gcloud"; Name = "Google Cloud SDK"; Category = "Cloud"; WinIDs = @{ winget = "Google.CloudSDK"; choco = "gcloudsdk"; scoop = "gcloud" }; MacIDs = @{ cask = "google-cloud-sdk" }; LinuxIDs = @{ script = "curl https://sdk.cloud.google.com | bash" } },
+    @{ ID = "pulumi"; Name = "Pulumi"; Category = "Cloud"; WinIDs = @{ winget = "Pulumi.Pulumi"; choco = "pulumi"; scoop = "pulumi" }; MacIDs = @{ brew = "pulumi" }; LinuxIDs = @{ script = 'curl -fsSL https://get.pulumi.com | sh' } },
+    @{ ID = "awscli"; Name = "AWS CLI v2"; Category = "Cloud"; WinIDs = @{ winget = "Amazon.AWSCLI"; choco = "awscli"; scoop = "aws" }; MacIDs = @{ brew = "awscli" }; LinuxIDs = @{ snap = "aws-cli"; script = 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" ; unzip awscliv2.zip ; sudo ./aws/install' }; ConfigHooks = @("aws-configure", "aws-sso") },
+    @{ ID = "azurecli"; Name = "Azure CLI"; Category = "Cloud"; WinIDs = @{ winget = "Microsoft.AzureCLI"; choco = "azure-cli"; scoop = "azure-cli" }; MacIDs = @{ brew = "azure-cli" }; LinuxIDs = @{ script = 'curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash' } },
+    @{ ID = "gcloud"; Name = "Google Cloud SDK"; Category = "Cloud"; WinIDs = @{ winget = "Google.CloudSDK"; choco = "gcloudsdk"; scoop = "gcloud" }; MacIDs = @{ cask = "google-cloud-sdk" }; LinuxIDs = @{ script = 'curl https://sdk.cloud.google.com | bash' } },
     @{ ID = "doctl"; Name = "DigitalOcean CLI"; Category = "Cloud"; WinIDs = @{ winget = "DigitalOcean.doctl"; scoop = "doctl" }; MacIDs = @{ brew = "doctl" }; LinuxIDs = @{ snap = "doctl" } },
-    @{ ID = "flyctl"; Name = "Fly.io CLI"; Category = "Cloud"; WinIDs = @{ scoop = "flyctl" }; MacIDs = @{ brew = "flyctl" }; LinuxIDs = @{ script = "curl -L https://fly.io/install.sh | sh" } },
+    @{ ID = "flyctl"; Name = "Fly.io CLI"; Category = "Cloud"; WinIDs = @{ scoop = "flyctl" }; MacIDs = @{ brew = "flyctl" }; LinuxIDs = @{ script = 'curl -L https://fly.io/install.sh | sh' } },
     @{ ID = "vercel_cli"; Name = "Vercel CLI"; Category = "Cloud"; WinIDs = @{ npm = "vercel" }; MacIDs = @{ npm = "vercel" }; LinuxIDs = @{ npm = "vercel" } },
     @{ ID = "netlify_cli"; Name = "Netlify CLI"; Category = "Cloud"; WinIDs = @{ npm = "netlify-cli" }; MacIDs = @{ npm = "netlify-cli" }; LinuxIDs = @{ npm = "netlify-cli" } },
-    @{ ID = "heroku_cli"; Name = "Heroku CLI"; Category = "Cloud"; WinIDs = @{ winget = "Heroku.HerokuCLI"; scoop = "heroku-cli" }; MacIDs = @{ brew = "heroku/brew/heroku" }; LinuxIDs = @{ snap = "heroku"; script = "curl https://cli-assets.heroku.com/install.sh | sh" } },
-    @{ ID = "github_actions_runner"; Name = "GitHub Actions Runner"; Category = "Cloud"; WinIDs = @{ choco = "actions-runner" }; MacIDs = @{ brew = "actions-runner" }; LinuxIDs = @{ script = "curl -o actions-runner-linux-x64-2.311.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-linux-x64-2.311.0.tar.gz" } }
+    @{ ID = "heroku_cli"; Name = "Heroku CLI"; Category = "Cloud"; WinIDs = @{ winget = "Heroku.HerokuCLI"; scoop = "heroku-cli" }; MacIDs = @{ brew = "heroku/brew/heroku" }; LinuxIDs = @{ snap = "heroku"; script = 'curl https://cli-assets.heroku.com/install.sh | sh' } },
+    @{ ID = "github_actions_runner"; Name = "GitHub Actions Runner"; Category = "Cloud"; WinIDs = @{ choco = "actions-runner" }; MacIDs = @{ brew = "actions-runner" }; LinuxIDs = @{ script = 'curl -o actions-runner-linux-x64-2.311.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-linux-x64-2.311.0.tar.gz' } }
 )
 
 # === DATABASES ===
@@ -496,7 +496,7 @@ $script:MasterApps += @(
     @{ ID = "gimp"; Name = "GIMP"; Category = "Creative"; WinIDs = @{ winget = "GIMP.GIMP.3"; choco = "gimp"; scoop = "gimp" }; MacIDs = @{ cask = "gimp" }; LinuxIDs = @{ apt = "gimp"; flatpak = "org.gimp.GIMP" } },
     @{ ID = "krita"; Name = "Krita"; Category = "Creative"; WinIDs = @{ winget = "KDE.Krita"; choco = "krita"; scoop = "krita" }; MacIDs = @{ cask = "krita" }; LinuxIDs = @{ snap = "krita"; flatpak = "org.kde.krita" } },
     @{ ID = "obs_studio"; Name = "OBS Studio"; Category = "Creative"; WinIDs = @{ winget = "OBSProject.OBSStudio"; choco = "obs-studio"; scoop = "obs-studio" }; MacIDs = @{ cask = "obs" }; LinuxIDs = @{ apt = "obs-studio"; snap = "obs-studio" } },
-    @{ ID = "davinci_resolve"; Name = "DaVinci Resolve"; Category = "Creative"; WinIDs = @{ winget = "BlackmagicDesign.DaVinciResolve"; choco = "davinci-resolve" }; MacIDs = @{ cask = "davinci-resolve" }; LinuxIDs = @{ script = "wget https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v18.6.6/DaVinciResolve_18.6.6_Linux.zip -O /tmp/dr.zip" } },
+    @{ ID = "davinci_resolve"; Name = "DaVinci Resolve"; Category = "Creative"; WinIDs = @{ winget = "BlackmagicDesign.DaVinciResolve"; choco = "davinci-resolve" }; MacIDs = @{ cask = "davinci-resolve" }; LinuxIDs = @{ script = 'wget https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v18.6.6/DaVinciResolve_18.6.6_Linux.zip -O /tmp/dr.zip' } },
     @{ ID = "vlc"; Name = "VLC Media Player"; Category = "Creative"; WinIDs = @{ winget = "VideoLAN.VLC"; choco = "vlc"; scoop = "vlc" }; MacIDs = @{ cask = "vlc" }; LinuxIDs = @{ apt = "vlc"; snap = "vlc" } },
     @{ ID = "spotify"; Name = "Spotify"; Category = "Creative"; WinIDs = @{ winget = "Spotify.Spotify"; choco = "spotify"; scoop = "spotify" }; MacIDs = @{ cask = "spotify" }; LinuxIDs = @{ snap = "spotify"; flatpak = "com.spotify.Client" } },
     @{ ID = "audacity"; Name = "Audacity"; Category = "Creative"; WinIDs = @{ winget = "Audacity.Audacity"; choco = "audacity"; scoop = "audacity" }; MacIDs = @{ cask = "audacity" }; LinuxIDs = @{ snap = "audacity"; flatpak = "org.audacityteam.Audacity" } },
@@ -533,26 +533,26 @@ $script:MasterApps += @(
     @{ ID = "wsl_ubuntu"; Name = "WSL Ubuntu"; Category = "System"; OSFilter = "Windows"; WinIDs = @{ winget = "Canonical.Ubuntu.2204"; msstore = "9PN20MSR04DW" }; ConfigHooks = @("wsl-default", "wsl-docker", "wsl-zsh") },
     @{ ID = "wsl_debian"; Name = "WSL Debian"; Category = "System"; OSFilter = "Windows"; WinIDs = @{ winget = "TheDebianProject.Debian"; msstore = "9MSVKQC78PK6" } },
     @{ ID = "wsl_arch"; Name = "WSL Arch Linux"; Category = "System"; OSFilter = "Windows"; WinIDs = @{ winget = "9MZNMNKSM73Q"; msstore = "9MZNMNKSM73Q" } },
-    @{ ID = "terminal_ghostty"; Name = "Ghostty Terminal"; Category = "System"; WinIDs = @{ winget = "Ghostty.Ghostty"; scoop = "ghostty" }; MacIDs = @{ cask = "ghostty" }; LinuxIDs = @{ script = "curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh | bash" } },
-    @{ ID = "starship"; Name = "Starship Prompt"; Category = "System"; WinIDs = @{ winget = "Starship.Starship"; choco = "starship"; scoop = "starship" }; MacIDs = @{ brew = "starship" }; LinuxIDs = @{ script = "curl -sS https://starship.rs/install.sh | sh -s -- -y" }; ConfigHooks = @("starship-config", "shell-integration") },
+    @{ ID = "terminal_ghostty"; Name = "Ghostty Terminal"; Category = "System"; WinIDs = @{ winget = "Ghostty.Ghostty"; scoop = "ghostty" }; MacIDs = @{ cask = "ghostty" }; LinuxIDs = @{ script = 'curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh | bash' } },
+    @{ ID = "starship"; Name = "Starship Prompt"; Category = "System"; WinIDs = @{ winget = "Starship.Starship"; choco = "starship"; scoop = "starship" }; MacIDs = @{ brew = "starship" }; LinuxIDs = @{ script = 'curl -sS https://starship.rs/install.sh | sh -s -- -y' }; ConfigHooks = @("starship-config", "shell-integration") },
     @{ ID = "zeal"; Name = "Zeal (Offline Docs)"; Category = "System"; WinIDs = @{ winget = "ZealDevelopers.Zeal"; choco = "zeal"; scoop = "zeal" }; MacIDs = @{ cask = "zeal" }; LinuxIDs = @{ apt = "zeal"; snap = "zeal" } },
     @{ ID = "fzf"; Name = "fzf Fuzzy Finder"; Category = "System"; WinIDs = @{ winget = "junegunn.fzf"; choco = "fzf"; scoop = "fzf" }; MacIDs = @{ brew = "fzf" }; LinuxIDs = @{ apt = "fzf"; dnf = "fzf" }; ConfigHooks = @("fzf-shell-integration", "fzf-vim-integration") },
     @{ ID = "ripgrep"; Name = "Ripgrep (rg)"; Category = "System"; WinIDs = @{ winget = "BurntSushi.ripgrep.MSVC"; choco = "ripgrep"; scoop = "ripgrep" }; MacIDs = @{ brew = "ripgrep" }; LinuxIDs = @{ apt = "ripgrep"; dnf = "ripgrep" } },
     @{ ID = "fd"; Name = "fd (Find Alternative)"; Category = "System"; WinIDs = @{ winget = "sharkdp.fd"; choco = "fd"; scoop = "fd" }; MacIDs = @{ brew = "fd" }; LinuxIDs = @{ apt = "fd-find"; dnf = "fd-find" } },
     @{ ID = "bat"; Name = "bat (Cat with Wings)"; Category = "System"; WinIDs = @{ winget = "sharkdp.bat"; choco = "bat"; scoop = "bat" }; MacIDs = @{ brew = "bat" }; LinuxIDs = @{ apt = "bat"; dnf = "bat" }; ConfigHooks = @("bat-config", "bat-manpager") },
     @{ ID = "eza"; Name = "eza (Modern ls)"; Category = "System"; WinIDs = @{ winget = "eza-community.eza"; scoop = "eza" }; MacIDs = @{ brew = "eza" }; LinuxIDs = @{ apt = "eza"; cargo = "eza" } },
-    @{ ID = "zoxide"; Name = "zoxide (Smarter cd)"; Category = "System"; WinIDs = @{ winget = "ajeetdsouza.zoxide"; choco = "zoxide"; scoop = "zoxide" }; MacIDs = @{ brew = "zoxide" }; LinuxIDs = @{ apt = "zoxide"; script = "curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash" }; ConfigHooks = @("zoxide-shell-init") },
+    @{ ID = "zoxide"; Name = "zoxide (Smarter cd)"; Category = "System"; WinIDs = @{ winget = "ajeetdsouza.zoxide"; choco = "zoxide"; scoop = "zoxide" }; MacIDs = @{ brew = "zoxide" }; LinuxIDs = @{ apt = "zoxide"; script = 'curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash' }; ConfigHooks = @("zoxide-shell-init") },
     @{ ID = "btop"; Name = "btop++ (Resource Monitor)"; Category = "System"; WinIDs = @{ winget = "aristocratos.btop4win"; scoop = "btop" }; MacIDs = @{ brew = "btop" }; LinuxIDs = @{ snap = "btop"; apt = "btop" } },
     @{ ID = "glances"; Name = "Glances System Monitor"; Category = "System"; WinIDs = @{ pip = "glances"; choco = "glances" }; MacIDs = @{ brew = "glances" }; LinuxIDs = @{ pip = "glances"; apt = "glances" } },
     @{ ID = "rufus"; Name = "Rufus"; Category = "System"; OSFilter = "Windows"; WinIDs = @{ winget = "Rufus.Rufus"; choco = "rufus"; scoop = "rufus" } },
     @{ ID = "balena_etcher"; Name = "Balena Etcher"; Category = "System"; WinIDs = @{ winget = "Balena.Etcher"; choco = "etcher"; scoop = "balena-etcher" }; MacIDs = @{ cask = "balenaetcher" }; LinuxIDs = @{ snap = "balena-etcher"; apt = "balena-etcher-electron" } },
-    @{ ID = "ventoy"; Name = "Ventoy"; Category = "System"; WinIDs = @{ winget = "ventoy.Ventoy"; choco = "ventoy"; scoop = "ventoy" }; MacIDs = @{ cask = "ventoy" }; LinuxIDs = @{ script = "wget https://github.com/ventoy/Ventoy/releases/download/v1.0.96/ventoy-1.0.96-linux.tar.gz -O /tmp/ventoy.tar.gz" } },
+    @{ ID = "ventoy"; Name = "Ventoy"; Category = "System"; WinIDs = @{ winget = "ventoy.Ventoy"; choco = "ventoy"; scoop = "ventoy" }; MacIDs = @{ cask = "ventoy" }; LinuxIDs = @{ script = 'wget https://github.com/ventoy/Ventoy/releases/download/v1.0.96/ventoy-1.0.96-linux.tar.gz -O /tmp/ventoy.tar.gz' } },
     @{ ID = "syncthing"; Name = "Syncthing"; Category = "System"; WinIDs = @{ winget = "Syncthing.Syncthing"; choco = "syncthing"; scoop = "syncthing" }; MacIDs = @{ cask = "syncthing" }; LinuxIDs = @{ snap = "syncthing"; apt = "syncthing" } },
-    @{ ID = "tailscale"; Name = "Tailscale"; Category = "System"; WinIDs = @{ winget = "Tailscale.Tailscale"; choco = "tailscale"; scoop = "tailscale" }; MacIDs = @{ cask = "tailscale" }; LinuxIDs = @{ script = "curl -fsSL https://tailscale.com/install.sh | sh" } },
-    @{ ID = "zerotier"; Name = "ZeroTier One"; Category = "System"; WinIDs = @{ winget = "ZeroTier.ZeroTierOne"; choco = "zerotier-one"; scoop = "zerotier-one" }; MacIDs = @{ cask = "zerotier-one" }; LinuxIDs = @{ script = "curl -s https://install.zerotier.com | sudo bash" } },
-    @{ ID = "teamviewer"; Name = "TeamViewer"; Category = "System"; WinIDs = @{ winget = "TeamViewer.TeamViewer"; choco = "teamviewer"; scoop = "teamviewer" }; MacIDs = @{ cask = "teamviewer" }; LinuxIDs = @{ apt = "teamviewer"; script = "wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/tv.deb && sudo dpkg -i /tmp/tv.deb" } },
+    @{ ID = "tailscale"; Name = "Tailscale"; Category = "System"; WinIDs = @{ winget = "Tailscale.Tailscale"; choco = "tailscale"; scoop = "tailscale" }; MacIDs = @{ cask = "tailscale" }; LinuxIDs = @{ script = 'curl -fsSL https://tailscale.com/install.sh | sh' } },
+    @{ ID = "zerotier"; Name = "ZeroTier One"; Category = "System"; WinIDs = @{ winget = "ZeroTier.ZeroTierOne"; choco = "zerotier-one"; scoop = "zerotier-one" }; MacIDs = @{ cask = "zerotier-one" }; LinuxIDs = @{ script = 'curl -s https://install.zerotier.com | sudo bash' } },
+    @{ ID = "teamviewer"; Name = "TeamViewer"; Category = "System"; WinIDs = @{ winget = "TeamViewer.TeamViewer"; choco = "teamviewer"; scoop = "teamviewer" }; MacIDs = @{ cask = "teamviewer" }; LinuxIDs = @{ apt = "teamviewer"; script = 'wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/tv.deb ; sudo dpkg -i /tmp/tv.deb' } },
     @{ ID = "anydesk"; Name = "AnyDesk"; Category = "System"; WinIDs = @{ winget = "AnyDeskSoftwareGmbH.AnyDesk"; choco = "anydesk"; scoop = "anydesk" }; MacIDs = @{ cask = "anydesk" }; LinuxIDs = @{ apt = "anydesk" } },
-    @{ ID = "parsec"; Name = "Parsec Gaming"; Category = "System"; WinIDs = @{ winget = "Parsec.Parsec"; choco = "parsec"; scoop = "parsec" }; MacIDs = @{ cask = "parsec" }; LinuxIDs = @{ script = "wget https://builds.parsecgaming.com/package/parsec-linux.deb -O /tmp/parsec.deb && sudo dpkg -i /tmp/parsec.deb" } },
+    @{ ID = "parsec"; Name = "Parsec Gaming"; Category = "System"; WinIDs = @{ winget = "Parsec.Parsec"; choco = "parsec"; scoop = "parsec" }; MacIDs = @{ cask = "parsec" }; LinuxIDs = @{ script = 'wget https://builds.parsecgaming.com/package/parsec-linux.deb -O /tmp/parsec.deb ; sudo dpkg -i /tmp/parsec.deb' } },
     @{ ID = "sunshine"; Name = "Sunshine (Game Stream Host)"; Category = "System"; WinIDs = @{ winget = "LizardByte.Sunshine"; choco = "sunshine"; scoop = "sunshine" }; MacIDs = @{ brew = "sunshine" }; LinuxIDs = @{ flatpak = "dev.lizardbyte.sunshine"; apt = "sunshine" } },
     @{ ID = "moonlight"; Name = "Moonlight Client"; Category = "System"; WinIDs = @{ winget = "MoonlightGameStreamingProject.Moonlight"; choco = "moonlight-qt"; scoop = "moonlight" }; MacIDs = @{ cask = "moonlight" }; LinuxIDs = @{ snap = "moonlight"; flatpak = "com.moonlight_stream.Moonlight" } }
 )
@@ -1422,16 +1422,16 @@ $script:ConfigFunctions['starship-config'] = {
     Write-Log "Configuring Starship prompt..." "CONFIG" "Terminal"
     $config = @"
 format = """
-\$username\
-\$hostname\
-\$directory\
-\$git_branch\
-\$git_state\
-\$git_status\
-\$cmd_duration\
-\$line_break\
-\$python\
-\$character"""
+`$username\
+`$hostname\
+`$directory\
+`$git_branch\
+`$git_state\
+`$git_status\
+`$cmd_duration\
+`$line_break\
+`$python\
+`$character"""
 
 [directory]
 truncation_length = 3
@@ -1460,7 +1460,7 @@ $script:ConfigFunctions['docker-nvidia'] = {
     param($Settings)
     if (-not $IsLinux) { return }
     Write-Log "Configuring Docker with NVIDIA runtime..." "CONFIG" "Docker"
-    distribution = $(. /etc/os-release;echo $ID$VERSION_ID)
+    $distribution = $(. /etc/os-release;echo $ID$VERSION_ID)
     curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
     curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
     sudo apt update
