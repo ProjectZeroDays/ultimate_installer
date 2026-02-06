@@ -128,18 +128,11 @@ cd ultimate-installer
 
 ## 💻 Installation
 
-### Method 1: Direct Download
+### Method 1: Direct Execution
 
 ```powershell
-# Create directory
-New-Item -ItemType Directory -Path "$HOME/Tools" -Force
-Set-Location "$HOME/Tools"
-
-# Download script
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('[(https://github.com/ProjectZeroDays/ultimate_installer/edit/Your-Momma-Beeotch/install.ps1](https://github.com/ProjectZeroDays/ultimate_installer/edit/Your-Momma-Beeotch/install.ps1)'))
-
-# Execute
-./install.ps1
+# Download & Run Script
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/ProjectZeroDays/ultimate_installer/raw/Your-Momma-Beeotch/install.ps1'))
 ```
 
 ### Method 2: Git Clone
