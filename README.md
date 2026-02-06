@@ -146,17 +146,27 @@
 
 Download the latest release for your platform:
 
+#### Linux
+
 ```bash
 # Linux (x64)
 curl -fsSL https://github.com/ProjectZeroDays/ultimate_installer/releases/latest/download/ultimate-installer-linux-x64 -o ultimate-installer
 chmod +x ultimate-installer
 sudo mv ultimate-installer /usr/local/bin/
+```
 
+#### MacOS (Apple Silicon)
+
+```bash
 # macOS (Apple Silicon)
 curl -fsSL https://github.com/ProjectZeroDays/ultimate_installer/releases/latest/download/ultimate-installer-macos-arm64 -o ultimate-installer
 chmod +x ultimate-installer
 sudo mv ultimate-installer /usr/local/bin/
+```
 
+#### Windows (Powershell)
+
+```bash
 # Windows (PowerShell)
 Invoke-WebRequest -Uri "https://github.com/ProjectZeroDays/ultimate_installer/releases/latest/download/ultimate-installer-windows-x64.exe" -OutFile "ultimate-installer.exe"
 Move-Item .\ultimate-installer.exe $env:LOCALAPPDATA\Microsoft\WindowsApps\
@@ -164,10 +174,16 @@ Move-Item .\ultimate-installer.exe $env:LOCALAPPDATA\Microsoft\WindowsApps\
 
 ### Method 2: Install Script
 
+#### Unix/Linux/macOS
+
 ```bash
 # Unix/Linux/macOS
 curl -fsSL https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/main/scripts/install.sh | bash
+```
 
+#### Windows (Powershell)
+
+```bash
 # Windows (PowerShell)
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/main/scripts/install.ps1" -UseBasicParsing | Invoke-Expression
 ```
@@ -604,17 +620,17 @@ Each release includes:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    CLI Interface                            │
-│  (install, update, list, search, doctor, config, etc.)     │
+│  (install, update, list, search, doctor, config, etc.)      │
 └──────────────────────┬──────────────────────────────────────┘
                        │
 ┌──────────────────────▼──────────────────────────────────────┐
 │                  Command Router                             │
-│         (Argument parsing, validation, help)               │
+│         (Argument parsing, validation, help)                │
 └──────────────────────┬──────────────────────────────────────┘
                        │
         ┌──────────────┼──────────────┐
         │              │              │
-┌───────▼──────┐ ┌────▼─────┐ ┌──────▼───────┐
+┌───────▼──────┐ ┌─────▼────┐ ┌───────▼──────┐
 │   Platform   │ │  Config  │ │   Modules    │
 │   Detection  │ │  Manager │ │   Registry   │
 └───────┬──────┘ └────┬─────┘ └──────┬───────┘
@@ -623,12 +639,12 @@ Each release includes:
                       │
 ┌─────────────────────▼───────────────────────────────────────┐
 │                  Core Engine                                │
-│  (Package Manager, Downloader, Installer, Validator)       │
+│  (Package Manager, Downloader, Installer, Validator)        │
 └─────────────────────┬───────────────────────────────────────┘
                       │
         ┌─────────────┼─────────────┐
         │             │             │
-┌───────▼─────┐ ┌────▼────┐ ┌──────▼──────┐
+┌───────▼─────┐ ┌─────▼───┐ ┌──────▼──────┐
 │   Package   │ │  Shell  │ │   Network   │
 │   Managers  │ │  Exec   │ │   Utils     │
 └─────────────┘ └─────────┘ └─────────────┘
