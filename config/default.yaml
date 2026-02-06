@@ -1,0 +1,76 @@
+version: "0.1.0"
+name: "ultimate-installer"
+description: "Project Zero Days Ultimate Installer"
+
+paths:
+  unix:
+    installDir: "${HOME}/.local/share/ultimate-installer"
+    binDir: "${HOME}/.local/bin"
+    configDir: "${HOME}/.config/ultimate-installer"
+    cacheDir: "${HOME}/.cache/ultimate-installer"
+  windows:
+    installDir: "${USERPROFILE}\.ultimate-installer"
+    binDir: "${LOCALAPPDATA}\Microsoft\WindowsApps"
+    configDir: "${APPDATA}\ultimate-installer"
+    cacheDir: "${LOCALAPPDATA}\Temp\ui-cache"
+
+components:
+  - id: core
+    name: Core Tools
+    description: Essential tools and configurations
+    default: true
+    platforms: [linux, macos, windows, android, ios, freebsd, openbsd, netbsd]
+
+  - id: devtools
+    name: Development Tools
+    description: Programming languages and development environments
+    default: true
+    platforms: [linux, macos, windows, android, ios]
+    dependencies: [core]
+
+  - id: security-research
+    name: Security Research
+    description: Security testing and research toolkit
+    default: false
+    platforms: [linux, macos, android]
+    dependencies: [core, devtools]
+
+  - id: privacy
+    name: Privacy Tools
+    description: Anonymization and privacy utilities
+    default: false
+    platforms: [linux, macos, windows, android, ios]
+    dependencies: [core]
+
+  - id: forensics
+    name: Digital Forensics
+    description: Digital forensics and incident response
+    default: false
+    platforms: [linux, macos]
+    dependencies: [core, devtools]
+
+  - id: mobile-dev
+    name: Mobile Development
+    description: Mobile development environment setup
+    default: false
+    platforms: [android, ios]
+    dependencies: [core]
+
+  - id: embedded
+    name: Embedded Development
+    description: IoT and embedded systems tools
+    default: false
+    platforms: [linux]
+    dependencies: [core, devtools]
+
+  - id: network
+    name: Network Tools
+    description: Advanced networking and protocol analysis
+    default: false
+    platforms: [linux, macos, windows, android, ios]
+    dependencies: [core]
+
+urls:
+  repo: "https://github.com/ProjectZeroDays/ultimate_installer"
+  releases: "https://github.com/ProjectZeroDays/ultimate_installer/releases"
+  raw: "https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer"
