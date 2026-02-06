@@ -70,12 +70,7 @@
 
 ```powershell
 # Windows (PowerShell 7+)
-irm https://raw.githubusercontent.com/projectzerodays/ultimate-installer/main/install.ps1 | iex
-```
-
-```powershell
-# Windows (PowerShell 7+) [Alternative]
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('[(https://github.com/ProjectZeroDays/ultimate_installer/edit/Your-Momma-Beeotch/install.ps1](https://github.com/ProjectZeroDays/ultimate_installer/edit/Your-Momma-Beeotch/install.ps1)'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/ProjectZeroDays/ultimate_installer/raw/Your-Momma-Beeotch/install.ps1'))
 ```
 
 ```powershell
