@@ -1,735 +1,834 @@
+<div align="center">
 
-# 🚀 Ultimate Cross-Platform System Installer v5.0
+# 🔧 Ultimate Installer
 
-<p align="center">
-  <img src="https://img.shields.io/badge/PowerShell-7.0+-blue.svg " alt="PowerShell 7.0+">
-  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg " alt="Platforms">
-  <img src="https://img.shields.io/badge/Apps-150+-success.svg " alt="150+ Apps">
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg " alt="MIT License">
-</p>
+**The Universal Cross-Platform Development Environment Installer**
 
-<p align="center">
-  <b>Professional-grade automated installer for developers, penetration testers, AI engineers, and privacy enthusiasts.</b><br>
-  <i>One script. Every platform. Infinite configurations.</i>
-</p>
+[![Deno](https://img.shields.io/badge/Deno-1.40+-000000?logo=deno)](https://deno.land)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?logo=typescript)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-Automated-success)](https://github.com/ProjectZeroDays/ultimate_installer/actions)
+[![Platforms](https://img.shields.io/badge/Platforms-50+-blueviolet)]()
+[![Security](https://img.shields.io/badge/Security-Audited-brightgreen)]()
+
+[Installation](#installation) • [Documentation](docs/) • [Contributing](CONTRIBUTING.md) • [Changelog](CHANGELOG.md) • [Security](SECURITY.md)
+
+</div>
 
 ---
 
-## 📑 Table of Contents
+## 📋 Table of Contents
 
-- [✨ Features](#-features)
-- [🚀 Quick Start](#-quick-start)
-- [📋 Requirements](#-requirements)
-- [💻 Installation](#-installation)
-- [🎮 Usage Guide](#-usage-guide)
-  - [Main Menu](#main-menu)
-  - [Real-Time Search](#real-time-search)
-  - [Update Management](#update-management)
-  - [System Tweaks](#system-tweaks)
-- [🛡️ Security & Privacy](#️-security--privacy)
-  - [Kodachi Linux Suite](#kodachi-linux-suite)
-  - [Kali Linux Integration](#kali-linux-integration)
-- [⚙️ Configuration](#️-configuration)
-  - [Built-in Profiles](#built-in-profiles)
-  - [Settings File](#settings-file)
-  - [Auto-Configuration Hooks](#auto-configuration-hooks)
-- [📦 Supported Applications](#-supported-applications)
-  - [Core Development](#core-development)
-  - [Languages & Runtimes](#languages--runtimes)
-  - [AI & Machine Learning](#ai--machine-learning)
-  - [Cybersecurity](#cybersecurity)
-  - [Cloud & DevOps](#cloud--devops)
-  - [Databases](#databases)
-  - [Creative Tools](#creative-tools)
-  - [System Utilities](#system-utilities)
-- [🔧 Troubleshooting](#-troubleshooting)
-- [🤝 Contributing](#-contributing)
-- [📜 License](#-license)
+- [Overview](#overview)
+- [Features](#features)
+- [Supported Platforms](#supported-platforms)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Modules](#modules)
+- [CI/CD & Automation](#cicd--automation)
+- [Architecture](#architecture)
+- [Development](#development)
+- [Contributing](#contributing)
+- [Security](#security-1)
+- [License](#license)
+
+---
+
+## 🎯 Overview
+
+**Ultimate Installer** is a comprehensive, cross-platform development environment setup tool designed to work across **50+ operating systems** and environments. From traditional Linux distributions to mobile environments (Termux, iSH), embedded systems, and exotic platforms, Ultimate Installer provides a unified interface for installing development tools, security research utilities, and system configurations.
+
+### Why Ultimate Installer?
+
+- **Universal Compatibility**: Works on everything from Ubuntu to SerenityOS
+- **Single Binary**: Compile to standalone executables for each platform
+- **Intelligent Detection**: Automatically detects your OS, distribution, and architecture
+- **Modular Design**: Install only what you need, when you need it
+- **Production Ready**: Enterprise-grade CI/CD, automated testing, and security auditing
 
 ---
 
 ## ✨ Features
 
+### Core Capabilities
+
 | Feature | Description | Status |
 |---------|-------------|--------|
-| **🎯 Smart OS Detection** | Automatic platform identification with manual override | ✅ |
-| **📦 150+ Applications** | Curated database across 8 categories | ✅ |
-| **🔍 Real-Time Search** | PSReadLine-powered fuzzy finding with live filtering | ✅ |
-| **🔄 Update Checker** | Cached version checking with selective updates | ✅ |
-| **⚡ Multi-Package Managers** | WinGet, Chocolatey, Scoop, Homebrew, APT, DNF, Pacman, Snap, Flatpak | ✅ |
-| **🛡️ Kodachi Privacy** | Complete anonymity suite (Tor, MAC randomization, kill switch) | ✅ |
-| **🐉 Kali Integration** | Native Kali tools + Ubuntu bridge with safe APT pinning | ✅ |
-| **🔧 System Tweaks** | Performance, privacy, gaming, and developer optimizations | ✅ |
-| **⚙️ Auto-Configuration** | Profile-based post-install setup | ✅ |
-| **💾 Persistent Settings** | JSON-based configuration with import/export | ✅ |
+| **50+ Platforms** | Support for mainstream, mobile, embedded, and exotic OS | ✅ Complete |
+| **Package Manager Abstraction** | Unified interface for apt, dnf, pacman, apk, pkg, and more | ✅ Complete |
+| **Modular Architecture** | Install individual components or full suites | ✅ Complete |
+| **Mobile Development** | Full Termux (Android) and iSH (iOS) support | ✅ Complete |
+| **Security Toolkit** | Comprehensive penetration testing and research tools | ✅ Complete |
+| **Privacy Tools** | Anonymization, encryption, and privacy utilities | ✅ Complete |
+| **Forensics Suite** | Digital forensics and incident response tools | ✅ Complete |
+| **Embedded Support** | Raspberry Pi, IoT devices, and embedded systems | ✅ Complete |
+| **Network Tools** | Advanced networking and protocol analysis | ✅ Complete |
+| **Auto-Updates** | Self-updating capability and dependency management | ✅ Complete |
+
+### Platform Categories
+
+<details>
+<summary><b>🐧 Linux Distributions (25+)</b></summary>
+
+- **Debian-based**: Debian, Ubuntu, Mint, Pop!_OS, Zorin, Elementary, Kodachi, Parrot, Kali
+- **Arch-based**: Arch, Manjaro, BlackArch, Garuda, EndeavourOS
+- **RHEL-based**: Fedora, CentOS, RHEL, Rocky, Alma
+- **Independent**: Alpine, Gentoo, Slackware, Solus, Void, NixOS, Guix
+- **Mobile Linux**: Mobian, postmarketOS, Plasma Mobile, Ubuntu Touch
+
+</details>
+
+<details>
+<summary><b>📱 Mobile & Embedded (15+)</b></summary>
+
+- **Android**: Termux, KaiOS
+- **iOS**: iSH (Alpine-based)
+- **Embedded**: Raspberry Pi, Raspbian, OpenWrt, OPNsense, pfSense
+- **Specialized**: Tails, Qubes, CubooS, Porteus, SailfishOS, webOS
+
+</details>
+
+<details>
+<summary><b>🖥️ BSD & Unix (10+)</b></summary>
+
+- **BSD**: FreeBSD, OpenBSD, NetBSD, GhostBSD, TrueNAS
+- **Unix**: OpenIndiana, MINIX, Haiku, Redox, SerenityOS
+
+</details>
+
+<details>
+<summary><b>🪟 Other Platforms (10+)</b></summary>
+
+- **Windows**: Native, WSL, ReactOS
+- **macOS**: Intel, Apple Silicon
+- **ChromeOS**: Crostini, Brunch
+- **Gaming**: SteamOS (planned)
+
+</details>
 
 ---
 
-## 🚀 Quick Start
+## 💻 Supported Platforms
 
-### One-Line Install (Recommended)
+### Detailed Platform Matrix
 
-```powershell
-# Download & Run Script (PowerShell 7.0+ required)
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/refs/heads/main/all_in_one_install.ps1 '))
+| Platform | Architecture | Package Manager | Status | Notes |
+|----------|-------------|-----------------|--------|-------|
+| **Linux** | | | | |
+| Ubuntu | x64, ARM64 | apt | ✅ Supported | 20.04+ |
+| Debian | x64, ARM64 | apt | ✅ Supported | 10+ |
+| Arch Linux | x64, ARM64 | pacman | ✅ Supported | Rolling |
+| Fedora | x64, ARM64 | dnf | ✅ Supported | 35+ |
+| Kali Linux | x64, ARM64 | apt | ✅ Supported | Security focused |
+| BlackArch | x64 | pacman | ✅ Supported | Penetration testing |
+| Parrot OS | x64 | apt | ✅ Supported | Security & privacy |
+| Alpine | x64, ARM64 | apk | ✅ Supported | Lightweight |
+| NixOS | x64 | nix | ✅ Supported | Declarative |
+| **Mobile** | | | | |
+| Termux (Android) | ARM64, ARM | pkg | ✅ Supported | Android 7+ |
+| iSH (iOS) | ARM64 | apk | ✅ Supported | iOS 12+ |
+| **BSD** | | | | |
+| FreeBSD | x64 | pkg | ✅ Supported | 13+ |
+| OpenBSD | x64 | pkg_add | ✅ Supported | 7+ |
+| NetBSD | x64 | pkgin | ✅ Supported | 9+ |
+| **Other** | | | | |
+| macOS | x64, ARM64 | brew | ✅ Supported | 11+ |
+| Windows | x64 | winget/choco | ✅ Supported | 10/11 |
+| ChromeOS | x64 | apt | ✅ Supported | Crostini |
+
+---
+
+## 🚀 Installation
+
+### Method 1: Pre-built Binary (Recommended)
+
+Download the latest release for your platform:
+
+```bash
+# Linux (x64)
+curl -fsSL https://github.com/ProjectZeroDays/ultimate_installer/releases/latest/download/ultimate-installer-linux-x64 -o ultimate-installer
+chmod +x ultimate-installer
+sudo mv ultimate-installer /usr/local/bin/
+
+# macOS (Apple Silicon)
+curl -fsSL https://github.com/ProjectZeroDays/ultimate_installer/releases/latest/download/ultimate-installer-macos-arm64 -o ultimate-installer
+chmod +x ultimate-installer
+sudo mv ultimate-installer /usr/local/bin/
+
+# Windows (PowerShell)
+Invoke-WebRequest -Uri "https://github.com/ProjectZeroDays/ultimate_installer/releases/latest/download/ultimate-installer-windows-x64.exe" -OutFile "ultimate-installer.exe"
+Move-Item .\ultimate-installer.exe $env:LOCALAPPDATA\Microsoft\WindowsApps\
 ```
 
-```powershell
-# Download and Execute Locally
-git clone https://github.com/projectzerodays/ultimate-installer.git 
-cd ultimate-installer
-./all_in_one_install.ps1
+### Method 2: Install Script
+
+```bash
+# Unix/Linux/macOS
+curl -fsSL https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/main/scripts/install.sh | bash
+
+# Windows (PowerShell)
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/main/scripts/install.ps1" -UseBasicParsing | Invoke-Expression
 ```
 
-### First Launch
 
-```powershell
-# Run with default settings
-./all_in_one_install.ps1
 
-# Run with specific profile
-./all_in_one_install.ps1 -ConfigProfile "Cybersecurity"
+### Mobile Installation Scripts
 
-# Dry run (simulate without installing)
-./all_in_one_install.ps1 -DryRun
+For Android (Termux) and iOS (iSH), use the specialized install scripts:
 
-# Skip update checks
-./all_in_one_install.ps1 -NoUpdates
+**Android (Termux):**
+```bash
+curl -fsSL https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/main/scripts/install-termux.sh | bash
+```
 
-# Enable Kodachi privacy mode
-./all_in_one_install.ps1 -AutoTweak
+**iOS (iSH):**
+```bash
+curl -fsSL https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/main/scripts/install-ish.sh | sh
+```
+
+These scripts handle the specific requirements of mobile environments including:
+- Architecture detection (ARM64, ARM, x86_64)
+- Mobile-optimized binary selection
+- Proper permission handling for sandboxed environments
+
+### Method 3: Build from Source
+
+```bash
+# Clone repository
+git clone https://github.com/ProjectZeroDays/ultimate_installer.git
+cd ultimate_installer
+
+# Install Deno (if not installed)
+curl -fsSL https://deno.land/install.sh | sh
+
+# Run directly
+deno task start
+
+# Or compile to binary
+deno task compile
+```
+
+### Method 4: Package Managers
+
+```bash
+# Homebrew (macOS/Linux)
+brew tap projectzerodays/tap
+brew install ultimate-installer
+
+# Scoop (Windows)
+scoop bucket add projectzerodays
+scoop install ultimate-installer
+
+# Cargo (Rust)
+cargo install ultimate-installer
 ```
 
 ---
 
-## 📋 Requirements
+## ⚡ Quick Start
 
-### Minimum Requirements
+### Basic Usage
 
-| Component | Version | Notes |
-|-----------|---------|-------|
-| PowerShell | 7.0+ | **Required** - Windows PowerShell 5.1 not supported |
-| .NET | 6.0+ | Required for some package managers |
-| Internet | Broadband | ~500MB for base tools |
+```bash
+# Install all default components
+ultimate-installer install
 
-### Platform-Specific
+# Install specific module
+ultimate-installer install --module devtools
 
-#### Windows
-- Windows 10 1809+ or Windows 11
-- Windows Server 2019+ (GUI tools excluded automatically)
-- Administrator rights (for some tweaks and package managers)
+# Install multiple modules
+ultimate-installer install --module core,devtools,security
 
-#### macOS
-- macOS 11 (Big Sur)+
-- Xcode Command Line Tools (auto-installed if missing)
-- Homebrew (auto-installed if missing)
+# Dry run (see what would be installed)
+ultimate-installer install --dry-run
 
-#### Linux
-- Ubuntu 20.04+, Debian 11+, Fedora 35+, Arch Linux, or Kali Linux
-- `sudo` privileges required
-- systemd (for service configurations)
-- `curl` and `wget` for script-based installations
+# Interactive mode
+ultimate-installer install --interactive
+```
+
+### Platform-Specific Examples
+
+**Android (Termux):**
+```bash
+pkg install wget
+wget https://github.com/ProjectZeroDays/ultimate_installer/releases/latest/download/ultimate-installer-android
+chmod +x ultimate-installer-android
+./ultimate-installer-android install --module mobile-dev
+```
+
+**iOS (iSH):**
+```bash
+wget https://github.com/ProjectZeroDays/ultimate_installer/releases/latest/download/ultimate-installer-ish
+chmod +x ultimate-installer-ish
+./ultimate-installer-ish install --module core
+```
+
+**Docker:**
+```bash
+docker run -it --rm projectzerodays/ultimate-installer:latest install
+```
 
 ---
 
-## 💻 Installation
+## 📖 Usage
 
-### Method 1: Direct Execution (PowerShell 7)
-
-```powershell
-# Download & Run Script
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/refs/heads/main/all_in_one_install.ps1 '))
-```
-
-### Method 2: Git Clone (Recommended)
-
-```powershell
-git clone https://github.com/projectzerodays/ultimate-installer.git 
-cd ultimate-installer
-./all_in_one_install.ps1 -ConfigProfile "Developer"
-```
-
-### Method 3: Save and Run Locally
-
-1. Download `all_in_one_install.ps1` from the repository
-2. Save to a local directory (e.g., `C:\Tools\` or `~/tools/`)
-3. Run with PowerShell 7: `pwsh ./all_in_one_install.ps1`
-
----
-
-## 🎮 Usage Guide
-
-### Main Menu
+### Commands
 
 ```
-╔═══════════════════════════════════════════════════════════════════════╗
-║           ULTIMATE INSTALLER v5.0 - Ubuntu 22.04 [3 updates]          ║
-╠═══════════════════════════════════════════════════════════════════════╣
-║  Profile: Developer | 🔒 KODACHI MODE | 🛡️ KALI LINUX                ║
-╠═══════════════════════════════════════════════════════════════════════╣
-║  [1] 📦 Browse Categories  [2] 🔍 Real-Time Search  [3] 📋 Bundles   ║
-║  [4] 🔄 Check Updates      [5] 🔧 System Tweaks     [6] ⚙️ Settings  ║
-║  [7] 🛡️ Privacy Tools      [8] 🎯 Quick Install     [9] 📊 Status    ║
-╠═══════════════════════════════════════════════════════════════════════╣
-║     QUICK:  [DEV] [AI] [SEC] [CLOUD] [PRIVACY] [KALI] [KODACHI]       ║
-║     SPECIAL:  [W] Web AI  [U] Update All  [B] Backup  [R] Restore     ║
-╠═══════════════════════════════════════════════════════════════════════╣
-║  [Q] Quit  |  Direct: Type app name: (e.g., 'code', 'git', 'python')  ║
-╚═══════════════════════════════════════════════════════════════════════╝
+ultimate-installer <command> [options]
+
+Commands:
+  install [options]     Install components and tools
+  uninstall [options]   Remove installed components
+  list [options]        List available components
+  update [options]      Update package lists and tools
+  search <query>        Search for available packages
+  info [component]      Show detailed component information
+  doctor                Diagnose installation issues
+  config [action]       Manage configuration
+  completions [shell]   Generate shell completions
+  version               Show version information
+  help [command]        Show help for a command
+
+Global Options:
+  -v, --verbose         Enable verbose output
+  -q, --quiet           Suppress non-error output
+  --no-color            Disable colored output
+  --config <path>       Use custom configuration file
+  -h, --help            Show help
+  --version             Show version
 ```
 
-**Navigation:**
+### Install Command
 
-| Key | Action |
-|-----|--------|
-| `1` | Browse apps by category |
-| `2` | Real-time fuzzy search (if enabled) |
-| `3` | Popular bundled selections |
-| `4` | Check and manage updates |
-| `5` | System optimization tweaks |
-| `6` | Configure script settings |
-| `7` | Privacy & security tools submenu |
-| `8` | Quick install popular apps |
-| `9` | View system status |
-| `DEV/AI/SEC/CLOUD` | Quick bundle shortcuts |
-| `KODACHI` | Full privacy hardening |
-| `KALI` | Kali Linux tools |
-| `W` | Open AI web portals |
-| `U` | Update all apps |
+```bash
+# Install with specific options
+ultimate-installer install \
+  --module core,devtools \
+  --distribution ubuntu \
+  --architecture x64 \
+  --yes \
+  --verbose
 
-### Real-Time Search
-
-The real-time search feature (enabled by default) provides instant filtering as you type:
-
-```powershell
-# Enable in settings or use -EnableRealtimeSearch
-./all_in_one_install.ps1 -EnableRealtimeSearch
+# Install from custom repository
+ultimate-installer install \
+  --from https://github.com/custom/repo \
+  --branch develop
 ```
 
-**Controls:**
-- **Type** to filter apps instantly
-- **↑/↓** Navigate results
-- **Enter** Select highlighted app
-- **Esc** Exit search
+### Configuration Management
 
-Features:
-- Fuzzy matching on name, ID, and category
-- Visual indicators for installed apps
-- Description preview (if enabled in settings)
+```bash
+# View current configuration
+ultimate-installer config get
 
-### Update Management
+# Set configuration value
+ultimate-installer config set install.path /opt/tools
 
-The installer automatically checks for updates on launch (configurable interval: default 24h).
+# Reset to defaults
+ultimate-installer config reset
 
-**Update Prompt Options:**
-- `[U]` Update all detected apps
-- `[S]` Skip and continue
-- `[I]` Select individual updates
-- `[A]` Always skip (disable auto-check)
-
-**Manual Update Check:**
-```powershell
-./all_in_one_install.ps1 -CheckUpdates
+# Validate configuration
+ultimate-installer config validate
 ```
 
-### System Tweaks
+### System Diagnostics
 
-Access system optimizations via menu `[5]`:
+```bash
+# Run system diagnostics
+ultimate-installer doctor
 
-| Tweak | Platform | Description |
-|-------|----------|-------------|
-| **Ultimate Performance** | Windows | Disable animations, optimize power plan |
-| **Privacy Hardening** | Windows/macOS/Linux | Disable telemetry, tracking |
-| **Developer Mode** | Windows | WSL, Hyper-V, WinGet dev features |
-| **Gaming Optimization** | Windows | Fullscreen optimizations, game mode |
-| **macOS Dev Setup** | macOS | Xcode CLI, Finder dev settings |
-| **Linux Performance** | Linux | Low-latency kernel, sysctl tuning |
-| **Kodachi Full Setup** | Linux | Complete privacy hardening |
-| **Nerd Fonts** | All | JetBrains Mono, Fira Code, Cascadia |
+# Check specific component
+ultimate-installer doctor --component devtools
 
----
-
-## 🛡️ Security & Privacy
-
-### Kodachi Linux Suite
-
-Complete privacy hardening inspired by Kodachi OS:
-
-```powershell
-# Quick install all Kodachi tools
-./all_in_one_install.ps1 -AutoTweak
-
-# Or via menu: [7] → [1]
+# Fix common issues
+ultimate-installer doctor --fix
 ```
-
-**Components:**
-
-| Tool | Function |
-|------|----------|
-| **Tor Advanced Setup** | Transparent proxy routing ALL traffic through Tor |
-| **VPN Kill Switch** | Iptables-based killswitch prevents leaks |
-| **MAC Randomizer** | Automatic MAC address rotation on boot |
-| **DNSCrypt-Proxy** | Encrypted DNS with ad/tracker blocking |
-| **Firejail** | Application sandboxing for browsers |
-| **AppArmor** | Mandatory Access Control profiles |
-| **Metadata Cleaner** | MAT2 integration for file sanitization |
-
-**Post-Install Hardening:**
-- Tor transparent proxy on ports 9040/5353
-- Iptables rules auto-configured
-- systemd service for MAC randomization
-- DNS-over-HTTPS default
-
-### Kali Linux Integration
-
-**Native Kali:**
-```powershell
-# On Kali Linux - install everything
-[KALI] → Install kali-linux-everything (15GB+)
-```
-
-**Ubuntu/Debian Bridge:**
-```powershell
-# On Ubuntu - install selective tools
-./all_in_one_install.ps1 -AutoTweak
-
-# Setup repository with safe pinning (priority 50)
-sudo apt install -t kali-rolling kali-tools-top10
-```
-
-**Available Kali Categories:**
-- `kali-linux-headless` - Core tools
-- `kali-tools-top10` - Most popular tools
-- `kali-tools-wireless` - WiFi auditing (aircrack-ng, wifite)
-- `kali-tools-web` - Web pentesting (sqlmap, nikto, gobuster)
-- `kali-tools-forensics` - Digital forensics (autopsy, sleuthkit)
-- `kali-linux-everything` - Complete suite (15GB+)
-
-**Safety Features:**
-- APT pinning prevents accidental Kali system upgrade
-- Repository priority 50 (below Ubuntu default 500)
-- Tools install to standard paths
 
 ---
 
 ## ⚙️ Configuration
 
-### Built-in Profiles
+### Configuration Files
 
-Select a profile to auto-configure installed apps:
+Ultimate Installer uses a hierarchical configuration system:
 
-```powershell
-./all_in_one_install.ps1 -ConfigProfile "ProfileName"
+1. **Built-in defaults** (lowest priority)
+2. **System configuration** (`/etc/ultimate-installer/config.yaml`)
+3. **User configuration** (`~/.config/ultimate-installer/config.yaml`)
+4. **Project configuration** (`./.ultimate-installer.yaml`)
+5. **Environment variables** (highest priority)
+
+### Example Configuration
+
+```yaml
+# ~/.config/ultimate-installer/config.yaml
+version: "1.0"
+
+# Installation preferences
+install:
+  path: "${HOME}/.local/share/ultimate-installer"
+  parallel: true
+  max_concurrent: 4
+  verify_checksums: true
+  backup_existing: true
+
+# Module configuration
+modules:
+  core:
+    auto_update: true
+    packages:
+      - git
+      - curl
+      - wget
+      - vim
+
+  devtools:
+    languages:
+      - python
+      - node
+      - rust
+      - go
+    editors:
+      - vscode
+      - vim
+
+  security:
+    tools:
+      - nmap
+      - metasploit
+      - wireshark
+    enable_experimental: false
+
+# Platform-specific overrides
+platforms:
+  android:
+    install:
+      path: "/data/data/com.termux/files/usr"
+
+  ios:
+    install:
+      path: "/usr/local"
+
+# Mirrors and repositories
+repositories:
+  primary: "https://github.com/ProjectZeroDays/ultimate_installer"
+  mirrors:
+    - "https://gitlab.com/projectzerodays/ultimate_installer"
+    - "https://codeberg.org/projectzerodays/ultimate_installer"
+
+# Logging
+logging:
+  level: info
+  file: "${HOME}/.local/share/ultimate-installer/logs/installer.log"
+  max_size: 100MB
+  max_files: 5
 ```
 
-| Profile | Best For | Key Configurations |
-|---------|----------|-------------------|
-| **Default** | General use | Safe defaults, essential extensions |
-| **Developer** | Full-stack dev | VSCode extensions, Git config, Node/Python tools |
-| **Cybersecurity** | Pentesting | Burp Suite, Metasploit, Wireshark settings |
-| **AI/ML Engineer** | Machine learning | CUDA, Ollama models, Jupyter, Anaconda |
-| **Creative Professional** | Content creation | OBS plugins, DaVinci Resolve, Blender addons |
-| **Privacy Focused** | Maximum privacy | Hardened Firefox, VPN kill switch, Signal |
-| **Minimal** | Low-resource | Essential CLI tools only, no GUI configs |
+### Environment Variables
 
-### Settings File
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `UI_CONFIG_PATH` | Custom config file path | `/path/to/config.yaml` |
+| `UI_INSTALL_PATH` | Installation directory | `/opt/tools` |
+| `UI_LOG_LEVEL` | Logging level | `debug` |
+| `UI_PARALLEL` | Enable parallel installs | `true` |
+| `UI_OFFLINE` | Offline mode | `false` |
+| `UI_MIRROR` | Use specific mirror | `https://mirror.example.com` |
 
-Persistent configuration stored in `installer_settings.json`:
+---
 
-```json
-{
-  "Version": "5.0",
-  "LastUpdated": "2024-01-15",
-  "AutoCheckUpdates": true,
-  "UpdateCheckIntervalHours": 24,
-  "SkipUpdatePrompts": false,
-  "DefaultProfile": "Default",
-  "AutoConfigure": true,
-  "BackupBeforeInstall": true,
-  "EnableRealtimeSearch": true,
-  "SearchDelayMs": 150,
-  "ShowDescriptions": true,
-  "ColorScheme": "Default",
-  "ConfirmOSDetection": true,
-  "EnablePrivacyMode": false,
-  "KodachiMode": false,
-  "KaliToolsOnUbuntu": false,
-  "AutoHarden": false,
-  "ParallelInstalls": 1,
-  "TimeoutMinutes": 30,
-  "RetryFailed": true,
-  "BackupLocation": "~/UltimateInstaller/Backups",
-  "CustomRepos": [],
-  "ExcludedApps": []
+## 🧩 Modules
+
+### Available Modules
+
+| Module | ID | Description | Platforms |
+|--------|-----|-------------|-----------|
+| **Core** | `core` | Essential system tools | All |
+| **Development** | `devtools` | Programming languages & IDEs | All |
+| **Security** | `security` | Penetration testing tools | Linux, macOS |
+| **Privacy** | `privacy` | Anonymization & encryption | All |
+| **Forensics** | `forensics` | Digital forensics tools | Linux, macOS |
+| **Mobile Dev** | `mobile-dev` | Mobile development tools | Android, iOS |
+| **Embedded** | `embedded` | IoT & embedded tools | Linux |
+| **Network** | `network` | Advanced networking tools | All |
+
+### Module Details
+
+#### Core Module
+
+Essential tools for any development environment:
+
+- **System**: git, curl, wget, tar, unzip
+- **Editors**: vim, nano, micro
+- **Shells**: zsh, fish, bash enhancements
+- **Tools**: htop, tmux, fzf, ripgrep, fd
+
+#### Development Tools Module
+
+Programming languages and development environments:
+
+- **Languages**: Python, Node.js, Go, Rust, Ruby, Java, Kotlin, Swift
+- **Package Managers**: pip, npm, yarn, cargo, gem, gradle
+- **IDEs**: VS Code, JetBrains tools, Vim/Neovim
+- **Databases**: PostgreSQL, MySQL, MongoDB, Redis
+- **Containers**: Docker, Podman, Kubernetes tools
+
+#### Security Research Module
+
+Comprehensive security testing toolkit:
+
+- **Reconnaissance**: nmap, masscan, amass, subfinder
+- **Web**: nikto, sqlmap, burp-suite, zap
+- **Wireless**: aircrack-ng, wifite, kismet
+- **Exploitation**: metasploit, searchsploit, exploitdb
+- **Forensics**: volatility, sleuthkit, autopsy
+- **Reverse Engineering**: ghidra, radare2, binwalk
+
+#### Privacy Module
+
+Privacy and anonymity tools:
+
+- **Network**: tor, i2p, VPN clients
+- **Encryption**: gpg, veracrypt, cryptsetup
+- **Communication**: signal-cli, wire-cli
+- **OSINT**: sherlock, theharvester, maltego
+
+---
+
+## 🔄 CI/CD & Automation
+
+Ultimate Installer features a comprehensive, fully automated CI/CD pipeline that handles everything from code validation to release distribution.
+
+### Workflow Overview
+
+```mermaid
+graph TD
+    A[PR Created] --> B[Auto Approve]
+    B --> C[Run Tests]
+    C --> D{Pass?}
+    D -->|Yes| E[Auto Merge to contributors]
+    D -->|No| F[Notify Author]
+    E --> G[Dependency Check]
+    G --> H[Update Dependencies]
+    H --> I[Build All Platforms]
+    I --> J[Security Scan]
+    J --> K{Pass?}
+    K -->|Yes| L[Create Release]
+    K -->|No| M[Quarantine & Alert]
+    L --> N[Generate Artifacts]
+    N --> O[Publish Release]
+    O --> P[Update Documentation]
+```
+
+### Automated Workflows
+
+#### 1. Pull Request Automation
+
+**Auto Approval** (`.github/workflows/auto-approve.yml`):
+- Automatically approves PRs that:
+  - Pass all status checks
+  - Have required reviews
+  - No merge conflicts
+  - No security vulnerabilities
+
+**Auto Merge** (`.github/workflows/auto-merge.yml`):
+- Merges approved PRs to `contributors` branch
+- Maintainers manually merge `contributors` → `main`
+- Squash merge with conventional commit format
+
+#### 2. Dependency Automation
+
+**Dependency Update** (`.github/workflows/dependency-update.yml`):
+- Daily checks for Deno module updates
+- Weekly checks for GitHub Actions updates
+- Creates PRs with update details
+- Auto-merges if tests pass
+
+#### 3. Build & Test
+
+**Continuous Integration** (`.github/workflows/ci.yml`):
+- Linting (deno lint, format check)
+- Type checking (deno check)
+- Unit tests (deno test)
+- Integration tests
+- Coverage reporting
+
+#### 4. Security
+
+**Security Scanning** (`.github/workflows/security.yml`):
+- Dependency vulnerability scanning
+- Secret detection
+- Static analysis
+- Container scanning
+
+#### 5. Release Automation
+
+**Release** (`.github/workflows/release.yml`):
+- Triggered on push to `main` or dependency updates
+- Builds for all 50+ platforms
+- Generates release notes
+- Creates GitHub Release with artifacts
+- Updates homebrew/scoop taps
+
+### Artifact Generation
+
+Each release includes:
+
+| Artifact | Description | Platforms |
+|----------|-------------|-----------|
+| `ultimate-installer-{platform}` | Compiled binary | All |
+| `ultimate-installer-{platform}.zip` | Zipped binary | All |
+| `install.sh` | Unix install script | Linux, macOS, BSD |
+| `install.ps1` | PowerShell install script | Windows |
+| `checksums.txt` | SHA256 checksums | All |
+| `sbom.json` | Software Bill of Materials | All |
+
+### Release Channels
+
+| Channel | Trigger | Stability | Auto-update |
+|---------|---------|-----------|-------------|
+| `stable` | Tag push | Production | Yes |
+| `beta` | PR merge | Pre-release | Opt-in |
+| `nightly` | Daily cron | Development | Opt-in |
+| `canary` | Every commit | Bleeding edge | No |
+
+---
+
+## 🏗️ Architecture
+
+### System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    CLI Interface                            │
+│  (install, update, list, search, doctor, config, etc.)     │
+└──────────────────────┬──────────────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────────────┐
+│                  Command Router                             │
+│         (Argument parsing, validation, help)               │
+└──────────────────────┬──────────────────────────────────────┘
+                       │
+        ┌──────────────┼──────────────┐
+        │              │              │
+┌───────▼──────┐ ┌────▼─────┐ ┌──────▼───────┐
+│   Platform   │ │  Config  │ │   Modules    │
+│   Detection  │ │  Manager │ │   Registry   │
+└───────┬──────┘ └────┬─────┘ └──────┬───────┘
+        │             │              │
+        └─────────────┼──────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────┐
+│                  Core Engine                                │
+│  (Package Manager, Downloader, Installer, Validator)       │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+        ┌─────────────┼─────────────┐
+        │             │             │
+┌───────▼─────┐ ┌────▼────┐ ┌──────▼──────┐
+│   Package   │ │  Shell  │ │   Network   │
+│   Managers  │ │  Exec   │ │   Utils     │
+└─────────────┘ └─────────┘ └─────────────┘
+```
+
+### Module System
+
+```typescript
+// Example module structure
+interface Module {
+  id: string;
+  name: string;
+  version: string;
+  platforms: Platform[];
+  dependencies: string[];
+
+  detect(): Promise<boolean>;
+  install(options: InstallOptions): Promise<void>;
+  uninstall(): Promise<void>;
+  update(): Promise<void>;
 }
 ```
 
-**Modify via Menu:**
-```
-[6] Settings → [1-5] Category → Save
-```
+### Platform Detection Flow
 
-### Auto-Configuration Hooks
-
-Post-install automation for supported apps:
-
-| Hook | Configures |
-|------|-----------|
-| `git-config` | Global .gitconfig, delta pager, hooks |
-| `code-extensions` | VSCode extension marketplace installs |
-| `ps7-modules` | PSReadLine, Terminal-Icons, posh-git |
-| `starship-config` | Cross-shell prompt theme |
-| `docker-nvidia` | NVIDIA Container Toolkit |
-| `ollama-models` | Default LLM pulls (llama3.2, codellama, mistral) |
-| `obsidian-plugins` | Vault setup with community plugins |
-| `nvim-lazyvim` | Neovim configuration framework |
+1. **OS Detection**: Check `Deno.build.os` and environment variables
+2. **Distribution Detection**: Parse `/etc/os-release`, check specific files
+3. **Architecture Detection**: `uname -m`, `process.arch`
+4. **Environment Detection**: Container, WSL, VM, mobile
+5. **Package Manager Detection**: Check for available package managers
+6. **Capability Detection**: Root access, sudo, available tools
 
 ---
 
-## 📦 Supported Applications
+## 🛠️ Development
 
-### Core Development
+### Prerequisites
 
-| App | Windows | macOS | Linux | Config Hook |
-|-----|:-------:|:-----:|:-----:|-------------|
-| Git | ✅ | ✅ | ✅ | `git-config` |
-| GitHub CLI | ✅ | ✅ | ✅ | `gh-auth` |
-| PowerShell 7 | ✅ | ✅ | ✅ | `ps7-modules` |
-| Windows Terminal | ✅ | ❌ | ❌ | `wt-settings` |
-| VSCode | ✅ | ✅ | ✅ | `code-extensions` |
-| JetBrains Toolbox | ✅ | ✅ | ✅ | - |
-| Cursor (AI IDE) | ✅ | ✅ | ✅ | - |
-| Trae (ByteDance AI) | ✅ | ✅ | ❌ | `trae-cn-config` |
-| Neovim | ✅ | ✅ | ✅ | `nvim-lazyvim` |
-| Vim | ✅ | ✅ | ✅ | `vim-vundle` |
-| Emacs | ✅ | ✅ | ✅ | `emacs-doom` |
-| Helix | ✅ | ✅ | ✅ | - |
+- [Deno](https://deno.land) 1.40.0+
+- [Git](https://git-scm.com) 2.30+
+- [Make](https://www.gnu.org/software/make/) (optional)
 
-### Languages & Runtimes
+### Setup
 
-| App | Managers | Notes |
-|-----|----------|-------|
-| Python 3.12 | winget, brew, apt | poetry, pipx, pyenv setup |
-| Node.js LTS | winget, brew, apt | nvm, pnpm, yarn optional |
-| Bun | all | JavaScript runtime |
-| Deno | all | TypeScript runtime |
-| Rust | rustup | cargo config, analyzer |
-| Go | winget, brew, apt | - |
-| .NET 8 | winget, cask, snap | SDK + runtime |
-| OpenJDK 21 | Eclipse Temurin | LTS release |
-| Kotlin | all | JVM language |
-| Zig | all | Systems programming |
-| Crystal | brew, snap | Ruby-like syntax |
-
-### AI & Machine Learning
-
-| App | Function | Special Config |
-|-----|----------|---------------|
-| Ollama | Local LLM hosting | Model pulls, systemd |
-| Docker Desktop | Containerization | NVIDIA runtime option |
-| NVIDIA CUDA | GPU compute | Container toolkit |
-| Anaconda | Data science platform | conda-forge channels |
-| Jupyter Lab | Notebooks | Python dependency |
-| ChatGPT Desktop | OpenAI client | - |
-| Claude Desktop | Anthropic client | - |
-| Perplexity AI | Search assistant | - |
-| Continue.dev | AI coding assistant | VSCode integration |
-| TabNine | AI code completion | VSCode extension |
-| Codeium Windsurf | AI IDE | - |
-
-### Cybersecurity
-
-| App | Category | Platforms |
-|-----|----------|-----------|
-| Kali Linux (WSL) | Distro | Windows |
-| Metasploit | Exploitation | All |
-| Nmap/Zenmap | Network scanning | All |
-| Wireshark | Packet analysis | All |
-| Burp Suite | Web proxy | Win/Mac |
-| WireGuard | VPN | All |
-| ProtonVPN | VPN | All |
-| Mullvad VPN | VPN | All |
-| Tor Browser | Anonymity | All |
-| VeraCrypt | Encryption | All |
-| KeePassXC | Password manager | All |
-| YubiKey Manager | 2FA hardware | All |
-| Hashcat | Password cracking | All |
-| John the Ripper | Password cracking | All |
-| THC-Hydra | Brute force | All |
-| Gobuster | Directory busting | All |
-| Feroxbuster | Directory busting | All |
-| SQLMap | SQL injection | All |
-| Nikto | Web scanner | All |
-
-### Cloud & DevOps
-
-| App | Purpose |
-|-----|---------|
-| kubectl | Kubernetes control |
-| Helm | K8s package manager |
-| k9s | Kubernetes TUI |
-| Lens | K8s IDE |
-| Terraform | Infrastructure as code |
-| Pulumi | IaC (Python/JS/Go) |
-| AWS CLI v2 | Amazon Web Services |
-| Azure CLI | Microsoft Azure |
-| Google Cloud SDK | GCP management |
-| doctl | DigitalOcean |
-| flyctl | Fly.io deployment |
-| Vercel CLI | Frontend deployment |
-| Netlify CLI | Static site hosting |
-| Heroku CLI | Platform-as-a-Service |
-| GitHub Actions Runner | CI/CD self-hosted |
-
-### Databases
-
-| App | Type |
-|-----|------|
-| PostgreSQL 16 | Relational |
-| MySQL 8.0 | Relational |
-| MongoDB 7.0 | Document |
-| Redis | Key-value |
-| SQLite | Embedded |
-| DBeaver | Universal GUI |
-| TablePlus | Modern GUI |
-| Prisma Studio | ORM management |
-
-### Creative Tools
-
-| Category | Apps |
-|----------|------|
-| 3D/Video | Blender, DaVinci Resolve, OBS Studio |
-| Graphics | GIMP, Krita, Inkscape |
-| Audio | Audacity, LMMS |
-| Design | Figma, Penpot |
-| Media | VLC, Spotify |
-
-### System Utilities
-
-| App | Function |
-|-----|----------|
-| Ghostty | Modern terminal emulator |
-| Starship | Cross-shell prompt |
-| fzf | Fuzzy finder |
-| ripgrep (rg) | Fast search |
-| fd | Modern find |
-| bat | Syntax-highlighted cat |
-| eza | Modern ls |
-| zoxide | Smart cd |
-| btop++ | Resource monitor |
-| Rufus | USB creation (Win) |
-| BalenaEtcher | USB creation (All) |
-| Ventoy | Multi-boot USB |
-| Syncthing | File sync |
-| Tailscale | Zero-config VPN |
-| ZeroTier | SD-WAN |
-| TeamViewer | Remote desktop |
-| AnyDesk | Remote desktop |
-| Parsec | Game streaming |
-| Sunshine | Game stream host |
-| Moonlight | Game stream client |
-
----
-
-## 🔧 Troubleshooting
-
-### Common Issues
-
-#### "Script cannot be loaded because running scripts is disabled"
-
-**Solution:**
-```powershell
-# Current session only (recommended)
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
-
-# Or permanent for current user
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
-#### "WinGet is not recognized"
-
-**Solution:**
-```powershell
-# Install App Installer from Microsoft Store
-# Or use alternative package managers:
-./all_in_one_install.ps1
-# Then select apps using Chocolatey or Scoop instead
-```
-
-#### "Syntax errors when running the script"
-
-**Cause:** Using Windows PowerShell 5.1 instead of PowerShell 7.0+
-
-**Solution:**
-```powershell
-# Install PowerShell 7
-winget install Microsoft.PowerShell
-
-# Then run with pwsh
-pwsh ./all_in_one_install.ps1
-```
-
-#### "Kali tools fail on Ubuntu"
-
-**Check:**
-1. Repository added: `ls /etc/apt/sources.list.d/kali.list`
-2. Pinning correct: `cat /etc/apt/preferences.d/kali-pinning`
-3. Update cache: `sudo apt update`
-
-**Manual fix:**
 ```bash
-sudo apt install -t kali-rolling kali-tools-top10
+# Clone repository
+git clone https://github.com/ProjectZeroDays/ultimate_installer.git
+cd ultimate_installer
+
+# Install dependencies
+deno cache --reload src/main.ts
+
+# Run in development mode
+deno task dev
+
+# Run tests
+deno task test
+
+# Run with specific flags
+deno task start -- install --dry-run --verbose
 ```
 
-#### "Real-time search not working"
+### Build Commands
 
-**Requirements:**
-- PowerShell 7.0+
-- PSReadLine module: `Install-Module PSReadLine -Force`
-
-**Disable if problematic:**
-```powershell
-./all_in_one_install.ps1
-# [6] Settings → [2] UI Settings → Disable Real-time Search
-```
-
-#### "Linux script installations fail"
-
-**Cause:** Missing `curl` or `wget`
-
-**Solution:**
 ```bash
-# Ubuntu/Debian
-sudo apt install curl wget
+# Compile for current platform
+deno task compile
 
-# Fedora
-sudo dnf install curl wget
+# Compile for all platforms
+deno task compile:all
 
-# Arch
-sudo pacman -S curl wget
+# Compile for specific platform
+deno task compile:linux-x64
+deno task compile:macos-arm64
+deno task compile:windows-x64
+
+# Create release artifacts
+deno task release
 ```
 
-### Log Locations
+### Testing
 
-| Platform | Path |
-|----------|------|
-| Windows | `%USERPROFILE%\Documents\UltimateInstaller\` |
-| macOS | `~/Library/Application Support/UltimateInstaller/` |
-| Linux | `~/.ultimate_installer/` |
+```bash
+# Run all tests
+deno task test
 
-Log files include:
-- `Install_YYYYMMDD_HHMMSS_<session>.log` - Full transcript
-- `Session_<session>.json` - Structured JSON log
-- `update_cache.json` - Update check cache
+# Run unit tests only
+deno task test:unit
 
-### Debug Mode
+# Run integration tests
+deno task test:integration
 
-```powershell
-# Dry run (no actual changes)
-./all_in_one_install.ps1 -DryRun
+# Run with coverage
+deno task test:coverage
 
-# Skip bootstrap for faster testing
-./all_in_one_install.ps1 -SkipBootstrap
+# Run specific test file
+deno test tests/unit/core/platform.test.ts
+```
 
-# Silent mode (no prompts)
-./all_in_one_install.ps1 -Silent
+### Project Structure
+
+```
+ultimate_installer/
+├── .github/           # GitHub Actions, templates
+├── config/            # Configuration schemas
+├── docs/              # Documentation
+├── scripts/           # Build and utility scripts
+├── src/
+│   ├── commands/      # CLI commands
+│   ├── config/        # Configuration management
+│   ├── core/          # Core engine
+│   ├── modules/       # Installable modules
+│   ├── platforms/     # Platform detection/handling
+│   ├── utils/         # Utility functions
+│   └── types/         # TypeScript definitions
+├── tests/             # Test suites
+└── types/             # Global type definitions
 ```
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md).
+We welcome contributions from the community! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-### Quick Start for Contributors
+### Quick Contributing Guide
 
-```powershell
-# Fork and clone
-git clone https://github.com/projectzerodays/ultimate-installer.git 
-cd ultimate-installer
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
 
-# Create branch
-git checkout -b feature/amazing-feature
+### Contribution Areas
 
-# Make changes, test with dry run
-./all_in_one_install.ps1 -DryRun
+- 🐛 **Bug Fixes**: Fix issues and edge cases
+- ✨ **New Platforms**: Add support for new operating systems
+- 📦 **New Modules**: Create new installation modules
+- 📝 **Documentation**: Improve docs and examples
+- 🧪 **Tests**: Add test coverage
+- 🎨 **UI/UX**: Improve user interface
 
-# Commit
-git commit -m "feat: add amazing feature"
+### Code Standards
 
-# Push
-git push origin feature/amazing-feature
-```
-
-### Adding New Applications
-
-Edit the `$script:MasterApps` array in `all_in_one_install.ps1`:
-
-```powershell
-@{
-    ID = "unique-id"
-    Name = "Display Name"
-    Category = "Category"
-    WinIDs = @{ winget = "Publisher.App"; choco = "choco-id"; scoop = "scoop-id" }
-    MacIDs = @{ brew = "brew-id"; cask = "cask-id" }
-    LinuxIDs = @{ apt = "apt-id"; snap = "snap-id"; flatpak = "flatpak-id"; script = 'curl ... | bash' }
-    ConfigHooks = @("hook-name")
-    Description = "Brief description"
-    Warning = "Optional warning message"
-    Confirm = $false  # Set to $true for dangerous operations
-}
-```
-
-**Important:** For Linux `script` entries, use single quotes and semicolons (`;`) instead of `&&` for command chaining.
+- TypeScript strict mode enabled
+- Follow existing code style (enforced by deno fmt)
+- Add tests for new features
+- Update documentation
+- Use conventional commits
 
 ---
 
-## 📜 License
+## 🔒 Security
 
-MIT License - see [LICENSE](LICENSE) file for details.
+### Security Features
 
----
+- **Signed Releases**: All binaries signed with GPG
+- **Checksum Verification**: SHA256 checksums for all artifacts
+- **SBOM Generation**: Software Bill of Materials for each release
+- **Dependency Scanning**: Automated vulnerability scanning
+- **Secret Detection**: Prevents accidental secret commits
+- **Sandboxed Execution**: Isolated installation processes
 
-## 📝 Changelog
+### Reporting Vulnerabilities
 
-### v5.0 (2024-01-15)
-- ✅ Fixed PowerShell syntax errors (replaced `&&` with `;` for Linux commands)
-- ✅ Fixed string escaping issues in starship configuration
-- ✅ Fixed URL trailing spaces causing download failures
-- ✅ Improved error handling for script-based installations
-- ✅ Added comprehensive logging for troubleshooting
-- ✅ Verified compatibility with PowerShell 7.0+
+Please report security vulnerabilities to security@projectzerodays.com. See [SECURITY.md](SECURITY.md) for details.
 
-### v4.0 (Previous)
-- Added Kali Linux integration for Ubuntu
-- Added Kodachi privacy suite
-- Added real-time search functionality
+### Security Audit
 
----
+```bash
+# Run security audit
+ultimate-installer doctor --security
 
-<p align="center">
-  <b>Made with 💜 by Ez'ra with Project Zero</b><br>
-  <a href="https://github.com/projectzerodays/ultimate-installer/issues ">Report Bug</a> •
-  <a href="https://github.com/projectzerodays/ultimate-installer/discussions ">Discussions</a> •
-  <a href="https://github.com/projectzerodays/ultimate-installer/releases ">Releases</a>
-</p>
+# Check for known vulnerabilities
+ultimate-installer audit
+
+# Verify installation integrity
+ultimate-installer verify
 ```
 
 ---
 
-## To Save This File Yourself:
+## 📄 License
 
-1. **Copy all the content above** (from `# 🚀 Ultimate` to the end)
-2. **Open your text editor** (VS Code, Notepad++, or any editor)
-3. **Paste the content**
-4. **Save as `README.md`** in the same folder as your `all_in_one_install.ps1`
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Or use this quick PowerShell command to create it:
+---
 
-```powershell
-# Create README.md in current directory
-$content = @'
-# Paste the entire content here between the quotes
-'@
+## 🙏 Acknowledgments
 
-$content | Out-File -FilePath "README.md" -Encoding UTF8
+- [Deno](https://deno.land) - The modern runtime for JavaScript and TypeScript
+- [Cliffy](https://cliffy.io) - Command line framework for Deno
+- All contributors who have helped shape this project
+
+---
+
+<div align="center">
+
+**[⬆ Back to Top](#-ultimate-installer)**
+
+Made with ❤️ by [Project Zero Days](https://github.com/ProjectZeroDays)
+
+</div>
