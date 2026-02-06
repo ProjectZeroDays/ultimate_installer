@@ -1,4 +1,3 @@
-```markdown
 # 🚀 Ultimate Cross-Platform System Installer
 
 <p align="center">
@@ -639,4 +638,3 @@ MIT License - see [LICENSE](LICENSE) file for details.
   <a href="https://github.com/yourusername/ultimate-installer/discussions">Discussions</a> •
   <a href="https://github.com/yourusername/ultimate-installer/releases">Releases</a>
 </p>
-```
