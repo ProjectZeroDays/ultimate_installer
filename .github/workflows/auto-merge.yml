@@ -1,0 +1,149 @@
+name: Auto Merge to Contributors
+
+on:
+  pull_request_review:
+    types: [submitted]
+  check_suite:
+    types: [completed]
+    conclusion: success
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.review.state == 'approved' ||
+      github.event.check_suite.conclusion == 'success'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Find eligible PRs
+        id: find-prs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pulls } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              base: 'contributors',
+              sort: 'updated',
+              direction: 'desc'
+            });
+
+            const eligiblePRs = pulls.filter(pr => {
+              // Check if PR is approved
+              return pr.mergeable === true && 
+                     pr.mergeable_state === 'clean' &&
+                     !pr.draft &&
+                     !pr.labels.some(l => l.name.includes('wip') || l.name.includes('do-not-merge'));
+            });
+
+            if (eligiblePRs.length > 0) {
+              core.setOutput('pr_number', eligiblePRs[0].number);
+              core.setOutput('pr_head_sha', eligiblePRs[0].head.sha);
+              return true;
+            }
+            return false;
+
+      - name: Merge to contributors branch
+        if: steps.find-prs.outputs.result == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = ${{ steps.find-prs.outputs.pr_number }};
+
+            // Merge the PR
+            await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+              merge_method: 'squash',
+              commit_title: `feat: merge PR #${prNumber} to contributors`,
+              commit_message: 'Auto-merged by GitHub Actions'
+            });
+
+            // Add comment
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ **Auto-merged to \`contributors\` branch**
+
+              This PR has been automatically merged to the \`contributors\` branch.
+
+              **Next Step:** A maintainer will review and merge \`contributors\` → \`main\` when ready.
+
+              Thank you for your contribution! 🎉`
+            });
+
+  # Job to handle manual merge from contributors to main
+  promote-to-main:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/contributors'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if promotion needed
+        id: check-promotion
+        run: |
+          # Check if contributors is ahead of main
+          git fetch origin main
+          AHEAD=$(git rev-list --count origin/main..origin/contributors || echo "0")
+          echo "commits_ahead=$AHEAD" >> $GITHUB_OUTPUT
+
+          if [[ "$AHEAD" -gt 0 ]]; then
+            echo "needs_promotion=true" >> $GITHUB_OUTPUT
+          else
+            echo "needs_promotion=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create promotion PR
+        if: steps.check-promotion.outputs.needs_promotion == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: existingPRs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: 'contributors',
+              base: 'main'
+            });
+
+            if (existingPRs.length === 0) {
+              await github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🔀 Promote contributors to main',
+                head: 'contributors',
+                base: 'main',
+                body: `## Automated Promotion
+
+                This PR was automatically created to promote changes from \`contributors\` to \`main\`.
+
+                **Changes:**
+                - ${{ steps.check-promotion.outputs.commits_ahead }} commits to merge
+
+                **Action Required:**
+                - [ ] Review changes
+                - [ ] Run final checks
+                - [ ] Merge when ready
+
+                *This PR will be updated automatically as new changes are added to the contributors branch.*`
+              });
+            }

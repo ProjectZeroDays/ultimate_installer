@@ -1,0 +1,109 @@
+name: Auto Approve PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - main
+      - contributors
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: read
+  statuses: read
+
+jobs:
+  auto-approve:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.user.login != 'dependabot[bot]' &&
+      github.event.pull_request.user.login != 'renovate[bot]'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Wait for checks to complete
+        uses: fountainhead/action-wait-for-check@v1.2.0
+        id: wait-for-checks
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: "All checks"
+          ref: ${{ github.event.pull_request.head.sha }}
+          timeoutSeconds: 600
+          intervalSeconds: 10
+
+      - name: Check PR requirements
+        id: check-requirements
+        run: |
+          echo "Checking PR requirements..."
+
+          # Check if PR has required labels
+          LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels -q '.labels[].name')
+
+          if echo "$LABELS" | grep -q "wip\|do-not-merge"; then
+            echo "PR has blocking labels"
+            echo "should_approve=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Check if all status checks passed
+          if [[ "${{ steps.wait-for-checks.outputs.conclusion }}" != "success" ]]; then
+            echo "Not all checks passed"
+            echo "should_approve=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Check for merge conflicts
+          if gh pr view ${{ github.event.pull_request.number }} --json mergeable -q '.mergeable' | grep -q "CONFLICTING"; then
+            echo "PR has merge conflicts"
+            echo "should_approve=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "All requirements met"
+          echo "should_approve=true" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-approve PR
+        if: steps.check-requirements.outputs.should_approve == 'true'
+        uses: hmarr/auto-approve-action@v4
+        with:
+          review-message: |
+            ✅ **Auto-approved**
+
+            This PR has passed all automated checks:
+            - All status checks passed
+            - No merge conflicts
+            - No blocking labels
+
+            A maintainer will review and merge when ready.
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add approval comment
+        if: steps.check-requirements.outputs.should_approve == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🤖 **Automated Approval**
+
+              This pull request has been automatically approved because it meets all criteria:
+              - ✅ All checks passed
+              - ✅ No merge conflicts  
+              - ✅ No blocking labels
+
+              **Next Steps:**
+              - This PR will be auto-merged to the \`contributors\` branch
+              - Maintainers can then merge \`contributors\` → \`main\` when ready
+
+              *This is an automated message. Please contact maintainers if you have questions.*`
+            })

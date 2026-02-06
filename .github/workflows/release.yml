@@ -1,0 +1,373 @@
+name: Release Automation
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., v1.0.0)'
+        required: false
+        default: ''
+      prerelease:
+        description: 'Mark as prerelease'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+  attestations: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # Build and test
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Cache Deno dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/deno
+          key: ${{ runner.os }}-deno-${{ hashFiles('**/deno.json') }}
+          restore-keys: ${{ runner.os }}-deno-
+
+      - name: Check formatting
+        run: deno fmt --check
+
+      - name: Run linter
+        run: deno lint
+
+      - name: Type check
+        run: deno check src/main.ts
+
+      - name: Run tests
+        run: deno task test:coverage
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false
+
+  # Build binaries for all platforms
+  build-binaries:
+    needs: build-and-test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            name: linux-x64
+            arch: x64
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            name: linux-arm64
+            arch: arm64
+          # macOS
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            name: macos-x64
+            arch: x64
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            name: macos-arm64
+            arch: arm64
+          # Windows
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            name: windows-x64
+            arch: x64
+          # Mobile
+          - os: ubuntu-latest
+            target: aarch64-linux-android
+            name: android
+            arch: arm64
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Compile binary
+        shell: bash
+        run: |
+          OUTPUT="ultimate-installer-${{ matrix.name }}"
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            OUTPUT="${OUTPUT}.exe"
+          fi
+
+          deno compile --allow-all --target ${{ matrix.target }} --output "dist/${OUTPUT}" src/main.ts
+
+          # Create compressed archive
+          cd dist
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            7z a "${OUTPUT%.exe}.zip" "$OUTPUT"
+          else
+            tar -czf "${OUTPUT}.tar.gz" "$OUTPUT"
+            zip "${OUTPUT}.zip" "$OUTPUT"
+          fi
+          cd ..
+
+      - name: Generate checksums
+        shell: bash
+        run: |
+          cd dist
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            certutil -hashfile "ultimate-installer-${{ matrix.name }}.exe" SHA256 | tail -n 1 > "ultimate-installer-${{ matrix.name }}.sha256"
+          else
+            sha256sum "ultimate-installer-${{ matrix.name }}" > "ultimate-installer-${{ matrix.name }}.sha256"
+          fi
+          cd ..
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: binaries-${{ matrix.name }}
+          path: |
+            dist/ultimate-installer-${{ matrix.name }}*
+          if-no-files-found: error
+
+  # Build install scripts
+  build-scripts:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Package install scripts
+        run: |
+          mkdir -p dist/scripts
+          cp scripts/install.sh dist/scripts/
+          cp scripts/install.ps1 dist/scripts/
+          chmod +x dist/scripts/install.sh
+
+          # Create checksums
+          cd dist/scripts
+          sha256sum install.sh > install.sh.sha256
+          sha256sum install.ps1 > install.ps1.sha256
+          cd ../..
+
+          # Create combined archive
+          cd dist
+          zip -r install-scripts.zip scripts/
+          tar -czf install-scripts.tar.gz scripts/
+
+      - name: Upload script artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: install-scripts
+          path: dist/*scripts*
+
+  # Generate SBOM
+  generate-sbom:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: spdx-json
+          output-file: dist/sbom.spdx.json
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: dist/sbom.spdx.json
+
+  # Create release
+  create-release:
+    needs: [build-binaries, build-scripts, generate-sbom]
+    runs-on: ubuntu-latest
+
+    outputs:
+      release_id: ${{ steps.create-release.outputs.id }}
+      upload_url: ${{ steps.create-release.outputs.upload_url }}
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine version
+        id: version
+        run: |
+          if [[ -n "${{ github.event.inputs.version }}" ]]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            # Generate version from date and run number
+            VERSION="v$(date +%Y.%m.%d)-${{ github.run_number }}"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Generate release notes
+        id: release-notes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: commits } = await github.rest.repos.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 10
+            });
+
+            const changes = commits.map(c => `- ${c.commit.message.split('\n')[0]} (@${c.author?.login || 'unknown'})`).join('\n');
+
+            const notes = `## What's Changed
+
+            ${changes}
+
+            ## Installation
+
+            ### Quick Install
+
+            **Linux/macOS:**
+            \`\`\`bash
+curl -fsSL https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.version }}/install.sh | bash
+\`\`\`
+
+            **Windows (PowerShell):**
+            \`\`\`powershell
+Invoke-WebRequest -Uri "https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.version }}/install.ps1" -UseBasicParsing | Invoke-Expression
+\`\`\`
+
+            ### Manual Download
+
+            See **Assets** below for platform-specific binaries.
+
+            ## Artifacts
+
+            | Platform | Binary | Archive |
+            |----------|--------|---------|
+            | Linux x64 | ultimate-installer-linux-x64 | .tar.gz, .zip |
+            | Linux ARM64 | ultimate-installer-linux-arm64 | .tar.gz, .zip |
+            | macOS x64 | ultimate-installer-macos-x64 | .tar.gz, .zip |
+            | macOS ARM64 | ultimate-installer-macos-arm64 | .tar.gz, .zip |
+            | Windows x64 | ultimate-installer-windows-x64.exe | .zip |
+            | Android | ultimate-installer-android | .tar.gz, .zip |
+
+            ## Verification
+
+            SHA256 checksums are provided for all artifacts. Verify with:
+            \`\`\`bash
+sha256sum -c ultimate-installer-*.sha256
+\`\`\`
+
+            ## SBOM
+
+            Software Bill of Materials (SBOM) available in SPDX format.`;
+
+            core.setOutput('notes', notes);
+
+      - name: Create Release
+        id: create-release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          body: ${{ steps.release-notes.outputs.notes }}
+          draft: false
+          prerelease: ${{ github.event.inputs.prerelease || false }}
+          files: |
+            artifacts/**/*
+          generate_release_notes: true
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: artifacts/**/*
+
+  # Update package managers
+  update-package-managers:
+    needs: create-release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Update Homebrew formula
+        uses: dawidd6/action-homebrew-bump-formula@v3
+        with:
+          token: ${{ secrets.HOMEBREW_TOKEN }}
+          formula: ultimate-installer
+          tag: ${{ needs.create-release.outputs.version }}
+        continue-on-error: true
+
+      - name: Update Scoop manifest
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Update scoop bucket repository
+            // This would trigger a workflow in the scoop-bucket repo
+            await github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: 'scoop-bucket',
+              event_type: 'update-formula',
+              client_payload: {
+                version: '${{ needs.create-release.outputs.version }}',
+                repository: context.repo.repo
+              }
+            });
+        continue-on-error: true
+
+  # Trigger documentation update
+  update-docs:
+    needs: create-release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger docs deployment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event_type: 'docs-update',
+              client_payload: {
+                version: '${{ needs.create-release.outputs.version }}'
+              }
+            });
