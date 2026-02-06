@@ -1,10 +1,11 @@
-# 🚀 Ultimate Cross-Platform System Installer
+
+# 🚀 Ultimate Cross-Platform System Installer v5.0
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PowerShell-7.0+-blue.svg" alt="PowerShell 7.0+">
-  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg" alt="Platforms">
-  <img src="https://img.shields.io/badge/Apps-150+-success.svg" alt="150+ Apps">
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License">
+  <img src="https://img.shields.io/badge/PowerShell-7.0+-blue.svg " alt="PowerShell 7.0+">
+  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg " alt="Platforms">
+  <img src="https://img.shields.io/badge/Apps-150+-success.svg " alt="150+ Apps">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg " alt="MIT License">
 </p>
 
 <p align="center">
@@ -69,31 +70,34 @@
 ### One-Line Install (Recommended)
 
 ```powershell
-# Download & Run Script
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/refs/heads/main/install.ps1'))
+# Download & Run Script (PowerShell 7.0+ required)
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/refs/heads/main/all_in_one_install.ps1 '))
 ```
 
 ```powershell
 # Download and Execute Locally
-git clone https://github.com/projectzerodays/ultimate-installer.git
+git clone https://github.com/projectzerodays/ultimate-installer.git 
 cd ultimate-installer
-./install.ps1
+./all_in_one_install.ps1
 ```
 
 ### First Launch
 
 ```powershell
 # Run with default settings
-./install.ps1
+./all_in_one_install.ps1
 
 # Run with specific profile
-./install.ps1 -ConfigProfile "Cybersecurity"
+./all_in_one_install.ps1 -ConfigProfile "Cybersecurity"
 
 # Dry run (simulate without installing)
-./install.ps1 -DryRun
+./all_in_one_install.ps1 -DryRun
 
 # Skip update checks
-./install.ps1 -NoUpdates
+./all_in_one_install.ps1 -NoUpdates
+
+# Enable Kodachi privacy mode
+./all_in_one_install.ps1 -AutoTweak
 ```
 
 ---
@@ -104,7 +108,7 @@ cd ultimate-installer
 
 | Component | Version | Notes |
 |-----------|---------|-------|
-| PowerShell | 7.0+ | Windows PowerShell 5.1 not supported |
+| PowerShell | 7.0+ | **Required** - Windows PowerShell 5.1 not supported |
 | .NET | 6.0+ | Required for some package managers |
 | Internet | Broadband | ~500MB for base tools |
 
@@ -113,45 +117,43 @@ cd ultimate-installer
 #### Windows
 - Windows 10 1809+ or Windows 11
 - Windows Server 2019+ (GUI tools excluded automatically)
-- Administrator rights (for some tweaks)
+- Administrator rights (for some tweaks and package managers)
 
 #### macOS
 - macOS 11 (Big Sur)+
 - Xcode Command Line Tools (auto-installed if missing)
+- Homebrew (auto-installed if missing)
 
 #### Linux
-- Ubuntu 20.04+, Debian 11+, Fedora 35+, Arch Linux
+- Ubuntu 20.04+, Debian 11+, Fedora 35+, Arch Linux, or Kali Linux
 - `sudo` privileges required
 - systemd (for service configurations)
+- `curl` and `wget` for script-based installations
 
 ---
 
 ## 💻 Installation
 
-### Method 1: Direct Execution
+### Method 1: Direct Execution (PowerShell 7)
 
 ```powershell
 # Download & Run Script
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/refs/heads/main/install.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/refs/heads/main/all_in_one_install.ps1 '))
 ```
 
-### Method 2: Git Clone
+### Method 2: Git Clone (Recommended)
 
 ```powershell
-git clone https://github.com/projectzerodayse/ultimate-installer.git
+git clone https://github.com/projectzerodays/ultimate-installer.git 
 cd ultimate-installer
-./install.ps1 -ConfigProfile "Developer"
+./all_in_one_install.ps1 -ConfigProfile "Developer"
 ```
 
-### Method 3: Package Manager (Future)
+### Method 3: Save and Run Locally
 
-```powershell
-# WinGet (Coming Soon)
-winget install UltimateInstaller
-
-# Homebrew (Coming Soon)
-brew install ultimate-installer
-```
+1. Download `all_in_one_install.ps1` from the repository
+2. Save to a local directory (e.g., `C:\Tools\` or `~/tools/`)
+3. Run with PowerShell 7: `pwsh ./all_in_one_install.ps1`
 
 ---
 
@@ -201,7 +203,7 @@ The real-time search feature (enabled by default) provides instant filtering as 
 
 ```powershell
 # Enable in settings or use -EnableRealtimeSearch
-./install.ps1 -EnableRealtimeSearch
+./all_in_one_install.ps1 -EnableRealtimeSearch
 ```
 
 **Controls:**
@@ -213,7 +215,7 @@ The real-time search feature (enabled by default) provides instant filtering as 
 Features:
 - Fuzzy matching on name, ID, and category
 - Visual indicators for installed apps
-- Description preview (if enabled)
+- Description preview (if enabled in settings)
 
 ### Update Management
 
@@ -227,7 +229,7 @@ The installer automatically checks for updates on launch (configurable interval:
 
 **Manual Update Check:**
 ```powershell
-./install.ps1 -CheckUpdates
+./all_in_one_install.ps1 -CheckUpdates
 ```
 
 ### System Tweaks
@@ -255,7 +257,7 @@ Complete privacy hardening inspired by Kodachi OS:
 
 ```powershell
 # Quick install all Kodachi tools
-./install.ps1 -KodachiMode
+./all_in_one_install.ps1 -AutoTweak
 
 # Or via menu: [7] → [1]
 ```
@@ -289,7 +291,7 @@ Complete privacy hardening inspired by Kodachi OS:
 **Ubuntu/Debian Bridge:**
 ```powershell
 # On Ubuntu - install selective tools
-./install.ps1 -KaliToolsOnUbuntu
+./all_in_one_install.ps1 -AutoTweak
 
 # Setup repository with safe pinning (priority 50)
 sudo apt install -t kali-rolling kali-tools-top10
@@ -317,7 +319,7 @@ sudo apt install -t kali-rolling kali-tools-top10
 Select a profile to auto-configure installed apps:
 
 ```powershell
-./install.ps1 -ConfigProfile "ProfileName"
+./all_in_one_install.ps1 -ConfigProfile "ProfileName"
 ```
 
 | Profile | Best For | Key Configurations |
@@ -337,16 +339,28 @@ Persistent configuration stored in `installer_settings.json`:
 ```json
 {
   "Version": "5.0",
+  "LastUpdated": "2024-01-15",
   "AutoCheckUpdates": true,
   "UpdateCheckIntervalHours": 24,
+  "SkipUpdatePrompts": false,
+  "DefaultProfile": "Default",
+  "AutoConfigure": true,
+  "BackupBeforeInstall": true,
   "EnableRealtimeSearch": true,
   "SearchDelayMs": 150,
+  "ShowDescriptions": true,
+  "ColorScheme": "Default",
   "ConfirmOSDetection": true,
+  "EnablePrivacyMode": false,
   "KodachiMode": false,
-  "KaliToolsOnUbuntu": true,
-  "ParallelInstalls": 2,
+  "KaliToolsOnUbuntu": false,
   "AutoHarden": false,
-  "BackupLocation": "~/UltimateInstaller/Backups"
+  "ParallelInstalls": 1,
+  "TimeoutMinutes": 30,
+  "RetryFailed": true,
+  "BackupLocation": "~/UltimateInstaller/Backups",
+  "CustomRepos": [],
+  "ExcludedApps": []
 }
 ```
 
@@ -525,7 +539,7 @@ Post-install automation for supported apps:
 
 **Solution:**
 ```powershell
-# Current session only
+# Current session only (recommended)
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 
 # Or permanent for current user
@@ -537,9 +551,22 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 **Solution:**
 ```powershell
 # Install App Installer from Microsoft Store
-# Or use alternative:
-./install.ps1 -SkipBootstrap
-# Then select [M] to install Chocolatey or Scoop
+# Or use alternative package managers:
+./all_in_one_install.ps1
+# Then select apps using Chocolatey or Scoop instead
+```
+
+#### "Syntax errors when running the script"
+
+**Cause:** Using Windows PowerShell 5.1 instead of PowerShell 7.0+
+
+**Solution:**
+```powershell
+# Install PowerShell 7
+winget install Microsoft.PowerShell
+
+# Then run with pwsh
+pwsh ./all_in_one_install.ps1
 ```
 
 #### "Kali tools fail on Ubuntu"
@@ -549,11 +576,38 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 2. Pinning correct: `cat /etc/apt/preferences.d/kali-pinning`
 3. Update cache: `sudo apt update`
 
+**Manual fix:**
+```bash
+sudo apt install -t kali-rolling kali-tools-top10
+```
+
 #### "Real-time search not working"
 
 **Requirements:**
 - PowerShell 7.0+
 - PSReadLine module: `Install-Module PSReadLine -Force`
+
+**Disable if problematic:**
+```powershell
+./all_in_one_install.ps1
+# [6] Settings → [2] UI Settings → Disable Real-time Search
+```
+
+#### "Linux script installations fail"
+
+**Cause:** Missing `curl` or `wget`
+
+**Solution:**
+```bash
+# Ubuntu/Debian
+sudo apt install curl wget
+
+# Fedora
+sudo dnf install curl wget
+
+# Arch
+sudo pacman -S curl wget
+```
 
 ### Log Locations
 
@@ -563,17 +617,22 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 | macOS | `~/Library/Application Support/UltimateInstaller/` |
 | Linux | `~/.ultimate_installer/` |
 
+Log files include:
+- `Install_YYYYMMDD_HHMMSS_<session>.log` - Full transcript
+- `Session_<session>.json` - Structured JSON log
+- `update_cache.json` - Update check cache
+
 ### Debug Mode
 
 ```powershell
-# Verbose logging
-./install.ps1 -Verbose
-
 # Dry run (no actual changes)
-./install.ps1 -DryRun
+./all_in_one_install.ps1 -DryRun
 
-# Specific log file
-./install.ps1 -LogFile "C:\debug.log"
+# Skip bootstrap for faster testing
+./all_in_one_install.ps1 -SkipBootstrap
+
+# Silent mode (no prompts)
+./all_in_one_install.ps1 -Silent
 ```
 
 ---
@@ -586,14 +645,14 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ```powershell
 # Fork and clone
-git clone https://github.com/projectzerodays/ultimate-installer.git
+git clone https://github.com/projectzerodays/ultimate-installer.git 
 cd ultimate-installer
 
 # Create branch
 git checkout -b feature/amazing-feature
 
-# Make changes, test
-./install.ps1 -DryRun
+# Make changes, test with dry run
+./all_in_one_install.ps1 -DryRun
 
 # Commit
 git commit -m "feat: add amazing feature"
@@ -604,20 +663,24 @@ git push origin feature/amazing-feature
 
 ### Adding New Applications
 
-Edit the `$script:MasterApps` array in `install.ps1`:
+Edit the `$script:MasterApps` array in `all_in_one_install.ps1`:
 
 ```powershell
 @{
     ID = "unique-id"
     Name = "Display Name"
     Category = "Category"
-    WinIDs = @{ winget = "Publisher.App"; choco = "choco-id" }
+    WinIDs = @{ winget = "Publisher.App"; choco = "choco-id"; scoop = "scoop-id" }
     MacIDs = @{ brew = "brew-id"; cask = "cask-id" }
-    LinuxIDs = @{ apt = "apt-id"; snap = "snap-id" }
+    LinuxIDs = @{ apt = "apt-id"; snap = "snap-id"; flatpak = "flatpak-id"; script = 'curl ... | bash' }
     ConfigHooks = @("hook-name")
     Description = "Brief description"
+    Warning = "Optional warning message"
+    Confirm = $false  # Set to $true for dangerous operations
 }
 ```
+
+**Important:** For Linux `script` entries, use single quotes and semicolons (`;`) instead of `&&` for command chaining.
 
 ---
 
@@ -627,9 +690,46 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
+## 📝 Changelog
+
+### v5.0 (2024-01-15)
+- ✅ Fixed PowerShell syntax errors (replaced `&&` with `;` for Linux commands)
+- ✅ Fixed string escaping issues in starship configuration
+- ✅ Fixed URL trailing spaces causing download failures
+- ✅ Improved error handling for script-based installations
+- ✅ Added comprehensive logging for troubleshooting
+- ✅ Verified compatibility with PowerShell 7.0+
+
+### v4.0 (Previous)
+- Added Kali Linux integration for Ubuntu
+- Added Kodachi privacy suite
+- Added real-time search functionality
+
+---
+
 <p align="center">
   <b>Made with 💜 by Ez'ra with Project Zero</b><br>
-  <a href="https://github.com/projectzerodays/ultimate-installer/issues">Report Bug</a> •
-  <a href="https://github.com/projectzerodays/ultimate-installer/discussions">Discussions</a> •
-  <a href="https://github.com/projectzerodays/ultimate-installer/releases">Releases</a>
+  <a href="https://github.com/projectzerodays/ultimate-installer/issues ">Report Bug</a> •
+  <a href="https://github.com/projectzerodays/ultimate-installer/discussions ">Discussions</a> •
+  <a href="https://github.com/projectzerodays/ultimate-installer/releases ">Releases</a>
 </p>
+```
+
+---
+
+## To Save This File Yourself:
+
+1. **Copy all the content above** (from `# 🚀 Ultimate` to the end)
+2. **Open your text editor** (VS Code, Notepad++, or any editor)
+3. **Paste the content**
+4. **Save as `README.md`** in the same folder as your `all_in_one_install.ps1`
+
+Or use this quick PowerShell command to create it:
+
+```powershell
+# Create README.md in current directory
+$content = @'
+# Paste the entire content here between the quotes
+'@
+
+$content | Out-File -FilePath "README.md" -Encoding UTF8
