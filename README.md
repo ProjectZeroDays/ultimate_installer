@@ -134,7 +134,7 @@ New-Item -ItemType Directory -Path "$HOME/Tools" -Force
 Set-Location "$HOME/Tools"
 
 # Download script
-Invoke-WebRequest -Uri "https://github.com/yourusername/ultimate-installer/releases/latest/download/install.ps1" -OutFile "install.ps1"
+ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('[https://community.chocolatey.org/install.ps1](https://github.com/ProjectZeroDays/ultimate_installer/edit/Your-Momma-Beeotch/install.ps1)'))
 
 # Execute
 ./install.ps1
@@ -143,7 +143,7 @@ Invoke-WebRequest -Uri "https://github.com/yourusername/ultimate-installer/relea
 ### Method 2: Git Clone
 
 ```powershell
-git clone https://github.com/yourusername/ultimate-installer.git
+git clone https://github.com/projectzerodayse/ultimate-installer.git
 cd ultimate-installer
 ./install.ps1 -ConfigProfile "Developer"
 ```
