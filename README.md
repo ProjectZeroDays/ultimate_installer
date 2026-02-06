@@ -132,7 +132,7 @@ cd ultimate-installer
 
 ```powershell
 # Download & Run Script
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/ProjectZeroDays/ultimate_installer/raw/Your-Momma-Beeotch/install.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ProjectZeroDays/ultimate_installer/refs/heads/main/install.ps1'))
 ```
 
 ### Method 2: Git Clone
@@ -160,20 +160,20 @@ brew install ultimate-installer
 ### Main Menu
 
 ```
-╔══════════════════════════════════════════════════════════════════════╗
-║           ULTIMATE INSTALLER v5.0 - Ubuntu 22.04 [3 updates]         ║
-╠══════════════════════════════════════════════════════════════════════╣
+╔═══════════════════════════════════════════════════════════════════════╗
+║           ULTIMATE INSTALLER v5.0 - Ubuntu 22.04 [3 updates]          ║
+╠═══════════════════════════════════════════════════════════════════════╣
 ║  Profile: Developer | 🔒 KODACHI MODE | 🛡️ KALI LINUX                ║
-╠══════════════════════════════════════════════════════════════════════╣
-║  [1] 📦 Browse Categories    [2] 🔍 Real-Time Search    [3] 📋 Bundles ║
-║  [4] 🔄 Check Updates        [5] 🔧 System Tweaks       [6] ⚙️  Settings ║
-║  [7] 🛡️ Privacy Tools        [8] 🎯 Quick Install       [9] 📊 Status   ║
-╠══════════════════════════════════════════════════════════════════════╣
-║  QUICK: [DEV] [AI] [SEC] [CLOUD] [PRIVACY] [KALI] [KODACHI]          ║
-║  SPECIAL: [W] Web AI  [U] Update All  [B] Backup  [R] Restore        ║
-╠══════════════════════════════════════════════════════════════════════╣
-║  [Q] Quit  |  Direct: Type app name (e.g., 'code', 'git', 'python')  ║
-╚══════════════════════════════════════════════════════════════════════╝
+╠═══════════════════════════════════════════════════════════════════════╣
+║  [1] 📦 Browse Categories  [2] 🔍 Real-Time Search  [3] 📋 Bundles   ║
+║  [4] 🔄 Check Updates      [5] 🔧 System Tweaks     [6] ⚙️ Settings  ║
+║  [7] 🛡️ Privacy Tools      [8] 🎯 Quick Install     [9] 📊 Status    ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║  QUICK: [DEV] [AI] [SEC] [CLOUD] [PRIVACY] [KALI] [KODACHI]           ║
+║  SPECIAL: [W] Web AI  [U] Update All  [B] Backup  [R] Restore         ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║  [Q] Quit  |  Direct: Type app name (e.g., 'code', 'git', 'python')   ║
+╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
 **Navigation:**
@@ -628,7 +628,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ---
 
 <p align="center">
-  <b>Made with 💜 by the Ultimate Installer Team</b><br>
+  <b>Made with 💜 by Ez'ra with Project Zero</b><br>
   <a href="https://github.com/projectzerodays/ultimate-installer/issues">Report Bug</a> •
   <a href="https://github.com/projectzerodays/ultimate-installer/discussions">Discussions</a> •
   <a href="https://github.com/projectzerodays/ultimate-installer/releases">Releases</a>
